@@ -1,0 +1,15 @@
+Pas de push sur la branch master
+On utilise la branch develop 
+On push sur la branche develop pour les petites modifs 
+Pour les grosses features, on utilise une branche style feature/button et à la fin de la feature on merge 
+	git checkout -b feature/foo develop
+	git checkout develop
+	// Switched to branch 'develop'
+	git merge --no-ff feature/foo
+	// Updating ea1b82a..05e9557
+	(Summary of changes)
+	git branch -d feature/foo
+	// Deleted branch myfeature (was 05e9557).
+	git push origin develop
+
+Cordialement bisous
