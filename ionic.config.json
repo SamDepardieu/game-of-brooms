@@ -1,4 +1,6 @@
 {
-  "name": "entrep",
-  "app_id": ""
+  "name": "Propro",
+  "app_id": "",
+  "v2": true,
+  "typescript": true
 }
