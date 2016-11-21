@@ -6,3 +6,5 @@ Bonjour à tous les contributeurs, pensez à lire les gitconsignes, sinon je vou
 
 Cordialement, 
 Bisous 
+
+L'équipe
