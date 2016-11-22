@@ -6,7 +6,7 @@ import { NavController } from 'ionic-angular';
   selector: 'page-taskdetail',
   templateUrl: 'taskdetail.html'
 })
-export class HomePage {
+export class Taskdetail {
 
   constructor(public navCtrl: NavController) {
     
