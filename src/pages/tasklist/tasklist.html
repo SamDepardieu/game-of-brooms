@@ -10,8 +10,11 @@
 
 <ion-list>
   <ion-item *ngFor="let item of items" (click)="clickOnItem(item)">
-  <p>{{item.title}} </p> 
-  <p>{{item.data}}</p>
+  <h2>{{item.title}}</h2> 
+  <h3>{{item.author}}</h3>
+  <p item-right>{{item.deadline}}</p>
+  <p item-right>{{item.doneOrNot}}</p>
+  <p item-right>{{item.reward}}</p>
   </ion-item>
 </ion-list>
 
