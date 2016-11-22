@@ -6,10 +6,12 @@ import { NavController } from 'ionic-angular';
   selector: 'page-taskadd',
   templateUrl: 'taskadd.html'
 })
-export class HomePage {
+export class Taskadd {
 
   constructor(public navCtrl: NavController) {
     
   }
+
+  
 
 }
