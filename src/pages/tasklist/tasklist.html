@@ -7,10 +7,13 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-list>
+  <ion-item *ngFor="let item of items" (click)="clickOnItem(item)">
+  <p>{{item.title}} </p> 
+  <p>{{item.data}}</p>
+  </ion-item>
+</ion-list>
 
   <!-- <button ion-button color="light">Tasks Details</button> -->
   <button ion-button color="dark" (click)="goToTaskAdd()" >Tasks Add</button>
