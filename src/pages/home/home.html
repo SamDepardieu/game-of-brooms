@@ -10,7 +10,13 @@
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p>
-  <button ion-button color="light" (click)="goToTaskList()">Tasks List</button>
-  <button ion-button color="dark" (click)="goToNotifList()">Notifications List</button>
+  <button ion-button icon-left color="light" (click)="goToTaskList()">
+  <ion-icon name="md-checkbox-outline"></ion-icon>
+  	Tasks List
+  </button>
+  <button ion-button icon-left color="dark" (click)="goToNotifList()">
+  <ion-icon name="md-notifications"></ion-icon>
+  	Notifications List
+  </button>
 </ion-content>
 
