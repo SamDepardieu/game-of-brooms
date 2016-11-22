@@ -6,7 +6,7 @@ import { NavController } from 'ionic-angular';
   selector: 'page-notif',
   templateUrl: 'notiflist.html'
 })
-export class HomePage {
+export class Notiflist {
 
   constructor(public navCtrl: NavController) {
     
