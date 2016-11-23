@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -28,7 +28,14 @@ export class ConnectDBService
 
 	public addTaskQuery()
 	{
-		console.log('add a task');
+		let data = {"name": "leetchi","color": "maroon"}; 
+		let dataString = JSON.stringify(data);
+		let headers = new Headers({'Content-Type':'application/json'});
+		let options = new RequestOptions({headers: headers});
+
+		return this.http.post(this.url, dataString, options)
+		.map((res:Response) => res.json())
+		.catch((error:any) => 'Server error');
 	}
 
 	public updateTaskQuery()

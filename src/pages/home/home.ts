@@ -28,19 +28,21 @@ export class HomePage {
 	  	/**
 	  	 * End of storage sample
 	  	 */
+	  		this.connectdb.doQuery().subscribe(
+			fruits => this.fruits = fruits
+			);
 	}
+
 
 	/**
 	 * Go to the taskl list page 
 	 */
 	public goToTaskList(): void
 	{
-		this.navCtrl.push(Tasklist);
+		// this.navCtrl.push(Tasklist);
 		// this.connectdb.doTheJob();
-		// this.connectdb.doQuery().subscribe(
-		// 	fruits => this.fruits = fruits
-		// 	);
-		// console.log(this.fruits);
+		console.log(this.fruits);
+	
 	}
 
 	/**
@@ -48,7 +50,9 @@ export class HomePage {
 	 */
 	public goToNotifList(): void
 	{
-		this.navCtrl.push(Notiflist); 
+		this.connectdb.addTaskQuery().subscribe(
+			fruits => this.fruits = fruits);
+		// this.navCtrl.push(Notiflist); 
 	}
 }
     
