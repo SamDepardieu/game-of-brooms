@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Rx';
 @Injectable()
 export class ConnectDBService
 {
-	private url = 'http://localhost:3000/api/fruits';
+	private apiUrl = 'http://localhost:3000/api/fruits';
 	constructor(private http: Http)
 	{
 
@@ -21,19 +21,18 @@ export class ConnectDBService
 
 	public doQuery()
 	{
-		return this.http.get(this.url)
+		return this.http.get(this.apiUrl)
 		.map((res:Response) => res.json())
 		.catch((error:any) => 'Server error');
 	}
 
 	public addTaskQuery()
 	{
-		let data = {"name": "leetchi","color": "maroon"}; 
-		let dataString = JSON.stringify(data);
+		let dataString = JSON.stringify({"name": "leetchi","color": "maroon"});
 		let headers = new Headers({'Content-Type':'application/json'});
 		let options = new RequestOptions({headers: headers});
 
-		return this.http.post(this.url, dataString, options)
+		return this.http.post(this.apiUrl, dataString, options)
 		.map((res:Response) => res.json())
 		.catch((error:any) => 'Server error');
 	}
