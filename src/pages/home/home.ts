@@ -14,6 +14,7 @@ import { Notiflist } from '../notificationlist/notiflist';
   templateUrl: 'home.html'
 })
 export class HomePage {
+	public fruits
   	constructor(private connectdb: ConnectDBService,public navCtrl: NavController, storage: Storage) {
 
 	  	/*
@@ -34,8 +35,12 @@ export class HomePage {
 	 */
 	public goToTaskList(): void
 	{
-		// this.navCtrl.push(Tasklist);
-		this.connectdb.doTheJob();
+		this.navCtrl.push(Tasklist);
+		// this.connectdb.doTheJob();
+		// this.connectdb.doQuery().subscribe(
+		// 	fruits => this.fruits = fruits
+		// 	);
+		// console.log(this.fruits);
 	}
 
 	/**
