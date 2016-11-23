@@ -28,31 +28,41 @@ export class HomePage {
 	  	/**
 	  	 * End of storage sample
 	  	 */
-	  		this.connectdb.doQuery().subscribe(
-			fruits => this.fruits = fruits
-			);
+	  		
 	}
 
+	ngOnInit()
+	{
+		this.loadTasks();
+
+	}
 
 	/**
 	 * Go to the taskl list page 
 	 */
-	public goToTaskList(): void
+	public goToTaskList()
 	{
 		// this.navCtrl.push(Tasklist);
 		// this.connectdb.doTheJob();
-		console.log(this.fruits);
+		this.loadTasks();
+		console.log(this.fruits.length);
 	
 	}
 
 	/**
 	 * Go to the notif list page 
 	 */
-	public goToNotifList(): void
+	public goToNotifList()
 	{
-		this.connectdb.addTaskQuery().subscribe(
-			fruits => this.fruits = fruits);
+		this.connectdb.addTaskQuery().subscribe();
 		// this.navCtrl.push(Notiflist); 
+	}
+
+	public loadTasks()
+	{
+		this.connectdb.getTasks().subscribe(
+			fruits => this.fruits = fruits
+		);
 	}
 }
     

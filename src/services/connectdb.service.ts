@@ -14,12 +14,12 @@ export class ConnectDBService
 
 	}
 
-	public doTheJob(): void
+	public doTheJob()
 	{
 		console.log('hello Im a service !');
 	}
 
-	public doQuery()
+	public getTasks()
 	{
 		return this.http.get(this.apiUrl)
 		.map((res:Response) => res.json())
@@ -45,11 +45,6 @@ export class ConnectDBService
 	public deleteTaskQuery()
 	{
 		console.log('delete task');
-	}
-
-	public getTasks()
-	{
-		console.log('get tasks');
 	}
 
 	public getTaskById()
