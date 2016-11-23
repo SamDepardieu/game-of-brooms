@@ -25,4 +25,29 @@ export class ConnectDBService
 		.map((res:Response) => res.json())
 		.catch((error:any) => 'Server error');
 	}
+
+	public addTaskQuery()
+	{
+		console.log('add a task');
+	}
+
+	public updateTaskQuery()
+	{
+		console.log('update a task');
+	}
+
+	public deleteTaskQuery()
+	{
+		console.log('delete task');
+	}
+
+	public getTasks()
+	{
+		console.log('get tasks');
+	}
+
+	public getTaskById()
+	{
+		console.log('get tasks by id');
+	}
 }
