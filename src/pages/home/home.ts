@@ -32,10 +32,18 @@ export class HomePage {
 	{
 		this.navCtrl.push(AboutPage); 
 	}
+
+	/**
+	 * Go to the taskl list page 
+	 */
 	public goToTaskList(): void
 	{
 		this.navCtrl.push(Tasklist);
 	}
+
+	/**
+	 * Go to the notif list page 
+	 */
 	public goToNotifList(): void
 	{
 		this.navCtrl.push(Notiflist); 
