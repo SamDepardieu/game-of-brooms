@@ -5,7 +5,6 @@ import { Storage } from '@ionic/storage';
 
 // import pages 
 import { HomePage } from '../pages/home/home';
-import { AboutPage } from '../pages/about/about';
 import { Tasklist } from '../pages/tasklist/tasklist';
 import { Notiflist } from '../pages/notificationlist/notiflist';
 import { Taskadd } from '../pages/taskadd/taskadd';
@@ -15,7 +14,6 @@ import { Taskdetail } from '../pages/taskdetail/taskdetail';
   declarations: [
     MyApp,
     HomePage,
-    AboutPage,
     Tasklist,
     Notiflist,
     Taskadd,
@@ -28,7 +26,6 @@ import { Taskdetail } from '../pages/taskdetail/taskdetail';
   entryComponents: [
     MyApp,
     HomePage,
-    AboutPage,
     Tasklist,
     Notiflist,
     Taskadd,
