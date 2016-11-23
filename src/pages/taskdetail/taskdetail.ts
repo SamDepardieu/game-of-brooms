@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-taskdetail',
@@ -8,7 +8,7 @@ import { NavController } from 'ionic-angular';
 })
 export class Taskdetail {
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    console.log(navParams.data);
   }
 }
