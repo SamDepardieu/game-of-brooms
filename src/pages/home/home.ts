@@ -11,8 +11,7 @@ import { Notiflist } from '../notificationlist/notiflist';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html',
-  providers: [ConnectDBService]
+  templateUrl: 'home.html'
 })
 export class HomePage {
   	constructor(private connectdb: ConnectDBService,public navCtrl: NavController, storage: Storage) {
@@ -35,8 +34,8 @@ export class HomePage {
 	 */
 	public goToTaskList(): void
 	{
-		this.navCtrl.push(Tasklist);
-		// this.connectdb.doTheJob();
+		// this.navCtrl.push(Tasklist);
+		this.connectdb.doTheJob();
 	}
 
 	/**

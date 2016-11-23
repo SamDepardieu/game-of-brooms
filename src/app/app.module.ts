@@ -10,6 +10,9 @@ import { Notiflist } from '../pages/notificationlist/notiflist';
 import { Taskadd } from '../pages/taskadd/taskadd';
 import { Taskdetail } from '../pages/taskdetail/taskdetail';
 
+// import services 
+import { ConnectDBService } from '../services/connectdb.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -32,7 +35,8 @@ import { Taskdetail } from '../pages/taskdetail/taskdetail';
     Taskdetail
   ],
   providers: [
-    Storage
+    Storage,
+    ConnectDBService
   ]
 })
 export class AppModule {}
