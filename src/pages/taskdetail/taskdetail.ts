@@ -9,7 +9,6 @@ import { NavController } from 'ionic-angular';
 export class Taskdetail {
 
   constructor(public navCtrl: NavController) {
-    
-  }
 
+  }
 }
