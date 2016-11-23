@@ -8,7 +8,6 @@ import { ConnectDBService } from '../../services/connectdb.service';
 // Import pages 
 import { Tasklist } from '../tasklist/tasklist';
 import { Notiflist } from '../notificationlist/notiflist';
-import {AboutPage} from '../about/about';
 
 @Component({
   selector: 'page-home',
@@ -29,11 +28,6 @@ export class HomePage {
 	  	/**
 	  	 * End of storage sample
 	  	 */
-	}
-
-	public goToPage(): void
-	{
-		this.navCtrl.push(AboutPage); 
 	}
 
 	/**

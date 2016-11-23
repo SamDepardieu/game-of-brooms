@@ -5,7 +5,7 @@ export class ConnectDBService
 {
 	constructor()
 	{
-
+		
 	}
 
 	public doTheJob(): void
