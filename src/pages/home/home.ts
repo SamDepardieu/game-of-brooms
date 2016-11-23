@@ -3,17 +3,20 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
+import { ConnectDBService } from '../../services/connectdb.service';
 
+// Import pages 
 import { Tasklist } from '../tasklist/tasklist';
 import { Notiflist } from '../notificationlist/notiflist';
 import {AboutPage} from '../about/about';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [ConnectDBService]
 })
 export class HomePage {
-  	constructor(public navCtrl: NavController, storage: Storage) {
+  	constructor(private connectdb: ConnectDBService,public navCtrl: NavController, storage: Storage) {
 
 	  	/*
 	  	 * Storage sample 
@@ -39,6 +42,7 @@ export class HomePage {
 	public goToTaskList(): void
 	{
 		this.navCtrl.push(Tasklist);
+		// this.connectdb.doTheJob();
 	}
 
 	/**
