@@ -12,6 +12,8 @@ import { Taskdetail } from '../pages/taskdetail/taskdetail';
 
 // import services 
 import { TaskService } from '../services/task.service';
+import { UserService } from '../services/user.service';
+import { GroupService } from '../services/group.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { TaskService } from '../services/task.service';
   ],
   providers: [
     Storage,
-    TaskService
+    TaskService,
+    UserService,
+    GroupService
   ]
 })
 export class AppModule {}
