@@ -31,6 +31,14 @@
       <button item-right ion-button>Add a user</button>
     </ion-item>
     <ion-item>
+      <ion-label>Group id</ion-label>
+      <ion-input [(ngModel)]="groupId" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Is Admin ? (0 or 1)</ion-label>
+      <ion-input [(ngModel)]="isAdmin" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
       <button ion-button (click)="getUsers()">Get users</button>
     </ion-item>
   </ion-list>
