@@ -15,9 +15,24 @@
   	Notifications List
   </button>
   <br>
-  <button ion-button>Add a group</button>
-  <button ion-button (click)="getGroups()">Get groups</button>
-  <button ion-button>Add a user</button>
-  <button ion-button (click)="getUsers()">Get users</button>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Group Name</ion-label>
+      <ion-input [(ngModel)]="groupName" type="text" value=""></ion-input>
+      <button item-right ion-button (click)="addGroup(groupName)" >Add a group</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="getGroups()">Get groups</button>
+    </ion-item>
+    <ion-item>
+      <ion-label>User Name</ion-label>
+      <ion-input [(ngModel)]="userName" type="text" value=""></ion-input>  
+      <button item-right ion-button>Add a user</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="getUsers()">Get users</button>
+    </ion-item>
+  </ion-list>
 </ion-content>
 

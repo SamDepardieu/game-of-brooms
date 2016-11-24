@@ -44,7 +44,7 @@ export class HomePage {
 		this.navCtrl.push(Notiflist); 
 	}
 
-	public getGroups()
+	public getGroups(): void
 	{
 		this.groupService.getGroups()
 			.subscribe(
@@ -54,7 +54,17 @@ export class HomePage {
 			);
 	}
 
-	public getUsers()
+	public addGroup(name: string): void
+	{
+		this.groupService.addGroup('dede')
+			.subscribe(
+				users => this.users = users,
+				err => console.log(err),
+				() => console.log('Group added')
+			);
+	}
+
+	public getUsers(): void
 	{
 		this.userService.getUsers()
 			.subscribe(	
