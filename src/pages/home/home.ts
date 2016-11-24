@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 
 import { TaskService } from '../../services/task.service';
 import { GroupService } from '../../services/group.service';
+import { UserService } from '../../services/user.service';
 
 // Import pages 
 import { Tasklist } from '../tasklist/tasklist';
@@ -15,7 +16,9 @@ import { Notiflist } from '../notificationlist/notiflist';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  	constructor(private groupService: GroupService,public navCtrl: NavController, storage: Storage) 
+	public groups;
+	public users; 
+  	constructor(private groupService: GroupService, private userService: UserService, public navCtrl: NavController, storage: Storage) 
   	{
 
 
@@ -39,6 +42,26 @@ export class HomePage {
 	public goToNotifList()
 	{
 		this.navCtrl.push(Notiflist); 
+	}
+
+	public getGroups()
+	{
+		this.groupService.getGroups()
+			.subscribe(
+				groups => this.groups = groups,
+				err => console.log(err),
+				() => console.log(this.groups)
+			);
+	}
+
+	public getUsers()
+	{
+		this.userService.getUsers()
+			.subscribe(	
+				users => this.users = users,
+				err => console.log(err),
+				() => console.log(this.users)
+			);
 	}
 }
     
