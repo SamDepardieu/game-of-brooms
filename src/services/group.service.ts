@@ -21,7 +21,7 @@ export class GroupService
 		.catch((error:any) => 'Server error'); 
 	}
 
-	public addGroup(name: string)
+	public addGroup(name: string): any
 	{
 		let data = JSON.stringify({"name": ""+name+""});
 		let headers = new Headers({'Content-Type':'application/json'});
