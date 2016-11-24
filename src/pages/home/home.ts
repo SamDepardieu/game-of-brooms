@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { TaskService } from '../../services/task.service';
+import { GroupService } from '../../services/group.service';
 
 // Import pages 
 import { Tasklist } from '../tasklist/tasklist';
@@ -14,27 +15,14 @@ import { Notiflist } from '../notificationlist/notiflist';
   templateUrl: 'home.html'
 })
 export class HomePage {
-	public fruits
-  	constructor(private taskservice: TaskService,public navCtrl: NavController, storage: Storage) {
+  	constructor(private groupService: GroupService,public navCtrl: NavController, storage: Storage) 
+  	{
 
-	  	/*
-	  	 * Storage sample 
-	  	 */
-	  	// storage.set('id', 'François');
-	  	// storage.get('id').then((data) =>
-	  	// {
-	  	// 	console.log('Your name is', data);
-	  	// });
-	  	/**
-	  	 * End of storage sample
-	  	 */
-	  		
+
 	}
 
 	ngOnInit()
 	{
-		this.loadTasks();
-
 	}
 
 	/**
@@ -42,11 +30,7 @@ export class HomePage {
 	 */
 	public goToTaskList()
 	{
-		// this.navCtrl.push(Tasklist);
-		// this.taskservice.doTheJob();
-		this.loadTasks();
-		console.log(this.fruits);
-	
+		this.navCtrl.push(Tasklist);
 	}
 
 	/**
@@ -54,16 +38,7 @@ export class HomePage {
 	 */
 	public goToNotifList()
 	{
-		this.taskservice.addTaskQuery().subscribe();
-		this.loadTasks();
-		// this.navCtrl.push(Notiflist); 
-	}
-
-	public loadTasks()
-	{
-		this.taskservice.getTasks().subscribe(
-			fruits => this.fruits = fruits
-		);
+		this.navCtrl.push(Notiflist); 
 	}
 }
     
