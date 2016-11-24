@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Rx';
 
 @Injectable()
-export class ConnectDBService
+export class TaskService
 {
 	private apiUrl = 'http://localhost:3000/api/fruits';
 	constructor(private http: Http)
@@ -47,7 +47,7 @@ export class ConnectDBService
 		console.log('delete task');
 	}
 
-	public getTaskById()
+	public getTaskByIdQuery()
 	{
 		console.log('get tasks by id');
 	}

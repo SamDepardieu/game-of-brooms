@@ -11,7 +11,7 @@ import { Taskadd } from '../pages/taskadd/taskadd';
 import { Taskdetail } from '../pages/taskdetail/taskdetail';
 
 // import services 
-import { ConnectDBService } from '../services/connectdb.service';
+import { TaskService } from '../services/task.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { ConnectDBService } from '../services/connectdb.service';
   ],
   providers: [
     Storage,
-    ConnectDBService
+    TaskService
   ]
 })
 export class AppModule {}

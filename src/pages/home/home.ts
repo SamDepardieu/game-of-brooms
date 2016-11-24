@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { ConnectDBService } from '../../services/connectdb.service';
+import { TaskService } from '../../services/task.service';
 
 // Import pages 
 import { Tasklist } from '../tasklist/tasklist';
@@ -15,7 +15,7 @@ import { Notiflist } from '../notificationlist/notiflist';
 })
 export class HomePage {
 	public fruits
-  	constructor(private connectdb: ConnectDBService,public navCtrl: NavController, storage: Storage) {
+  	constructor(private taskservice: TaskService,public navCtrl: NavController, storage: Storage) {
 
 	  	/*
 	  	 * Storage sample 
@@ -43,8 +43,9 @@ export class HomePage {
 	public goToTaskList()
 	{
 		// this.navCtrl.push(Tasklist);
-		// this.connectdb.doTheJob();
+		// this.taskservice.doTheJob();
 		this.loadTasks();
+		console.log(this.fruits);
 	
 	}
 
@@ -53,16 +54,14 @@ export class HomePage {
 	 */
 	public goToNotifList()
 	{
-		this.connectdb.addTaskQuery().subscribe();
-		this.connectdb.getTasks().subscribe(
-			fruits => this.fruits = fruits
-			);
+		this.taskservice.addTaskQuery().subscribe();
+		this.loadTasks();
 		// this.navCtrl.push(Notiflist); 
 	}
 
 	public loadTasks()
 	{
-		this.connectdb.getTasks().subscribe(
+		this.taskservice.getTasks().subscribe(
 			fruits => this.fruits = fruits
 		);
 	}
