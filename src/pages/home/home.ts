@@ -45,7 +45,6 @@ export class HomePage {
 		// this.navCtrl.push(Tasklist);
 		// this.connectdb.doTheJob();
 		this.loadTasks();
-		console.log(this.fruits.length);
 	
 	}
 
@@ -55,6 +54,9 @@ export class HomePage {
 	public goToNotifList()
 	{
 		this.connectdb.addTaskQuery().subscribe();
+		this.connectdb.getTasks().subscribe(
+			fruits => this.fruits = fruits
+			);
 		// this.navCtrl.push(Notiflist); 
 	}
 
