@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { TaskService } from '../../services/task.service';
 import { GroupService } from '../../services/group.service';
 import { UserService } from '../../services/user.service';
+import { LogService } from '../../services/log.service';
 
 // Import pages 
 import { Tasklist } from '../tasklist/tasklist';
@@ -22,7 +23,7 @@ import { Group } from '../classes/group';
 export class HomePage {
 	public groups;
 	public users; 
-  	constructor(private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams, storage: Storage) 
+  	constructor(private logService: LogService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams, storage: Storage) 
   	{
 
 
@@ -31,8 +32,7 @@ export class HomePage {
 	ngOnInit()
 	{
 		let userData = this.navParams.get('userParams').split(',');
-  		let userMember = new Member(parseInt(userData[0]), parseInt(userData[1]), userData[2], parseInt(userData[3]), parseInt(userData[4]));
-  		console.log(userMember); 
+		this.logService.setData(userData);
 	}
 
 	/**

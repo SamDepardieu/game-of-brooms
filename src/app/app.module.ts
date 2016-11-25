@@ -15,6 +15,7 @@ import { ConnectselectPage } from '../pages/connectselect/connectselect';
 import { TaskService } from '../services/task.service';
 import { UserService } from '../services/user.service';
 import { GroupService } from '../services/group.service';
+import { LogService } from '../services/log.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { GroupService } from '../services/group.service';
     ConnectselectPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, [LogService])
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +44,8 @@ import { GroupService } from '../services/group.service';
     Storage,
     TaskService,
     UserService,
-    GroupService
+    GroupService,
+    LogService
   ]
 })
 export class AppModule {}
