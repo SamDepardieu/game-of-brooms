@@ -56,9 +56,9 @@ export class HomePage {
 
 	public addGroup(name: string): void
 	{
-		this.groupService.addGroup('dede')
+		this.groupService.addGroup(name)
 			.subscribe(
-				users => this.users = users,
+				groups => this.groups = groups,
 				err => console.log(err),
 				() => console.log('Group added')
 			);
@@ -71,6 +71,17 @@ export class HomePage {
 				users => this.users = users,
 				err => console.log(err),
 				() => console.log(this.users)
+			);
+	}
+
+	public addUser(name: string, groupId: string, isAdmin: string): void
+	{
+		// console.log(name, groupId, isAdmin);
+		this.userService.addUser(name, parseInt(groupId), parseInt(isAdmin))
+		.subscribe(
+				users => this.users = users,
+				err => console.log(err),
+				() => console.log('User added')
 			);
 	}
 }
