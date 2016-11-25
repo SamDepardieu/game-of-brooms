@@ -74,13 +74,13 @@ export class HomePage {
 			);
 	}
 
-	public addUser(name: string, groupId: string, isAdmin: string): void
+
+	public addUser(name: string, groupId: number, isAdmin: number): void
 	{
-		// console.log(name, groupId, isAdmin);
-		this.userService.addUser(name, parseInt(groupId), parseInt(isAdmin))
-		.subscribe(
+		this.userService.addUser(name, groupId, isAdmin)
+			.subscribe(
 				users => this.users = users,
-				err => console.log(err),
+				err => console.error(err),
 				() => console.log('User added')
 			);
 	}
