@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
+import { HomePage } from '../home/home'
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class ConnectselectPage {
 
-  constructor(private userService: UserService, public navCtrl: NavController) {}
+  constructor(private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
   public users; 
   public userSelectors;
@@ -20,9 +21,14 @@ export class ConnectselectPage {
   	this.getUsers(); 
   }
 
-  public connect(click): void
+  public connect(data): void
   {
-  	console.log(click);
+  	console.log(data);
+
+  	this.navCtrl.push(HomePage, 
+  		{
+  			userParams: data
+  		});
   }
 
   public getUsers(): void

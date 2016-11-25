@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { TaskService } from '../../services/task.service';
@@ -11,6 +11,10 @@ import { UserService } from '../../services/user.service';
 import { Tasklist } from '../tasklist/tasklist';
 import { Notiflist } from '../notificationlist/notiflist';
 
+// Import classes 
+import { Member } from '../../classes/member';
+import { Group } from '../../classes/group';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -18,7 +22,7 @@ import { Notiflist } from '../notificationlist/notiflist';
 export class HomePage {
 	public groups;
 	public users; 
-  	constructor(private groupService: GroupService, private userService: UserService, public navCtrl: NavController, storage: Storage) 
+  	constructor(private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams, storage: Storage) 
   	{
 
 
@@ -26,6 +30,9 @@ export class HomePage {
 
 	ngOnInit()
 	{
+		console.log(this.navParams.get('userParams'));
+
+		// create object for user and group 
 	}
 
 	/**
