@@ -10,6 +10,11 @@ import { Notiflist } from '../pages/notificationlist/notiflist';
 import { Taskadd } from '../pages/taskadd/taskadd';
 import { Taskdetail } from '../pages/taskdetail/taskdetail';
 
+// import services 
+import { TaskService } from '../services/task.service';
+import { UserService } from '../services/user.service';
+import { GroupService } from '../services/group.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -32,7 +37,10 @@ import { Taskdetail } from '../pages/taskdetail/taskdetail';
     Taskdetail
   ],
   providers: [
-    Storage
+    Storage,
+    TaskService,
+    UserService,
+    GroupService
   ]
 })
 export class AppModule {}
