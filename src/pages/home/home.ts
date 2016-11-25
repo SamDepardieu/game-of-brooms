@@ -12,8 +12,8 @@ import { Tasklist } from '../tasklist/tasklist';
 import { Notiflist } from '../notificationlist/notiflist';
 
 // Import classes 
-import { Member } from '../../classes/member';
-import { Group } from '../../classes/group';
+import { Member } from '../classes/member';
+import { Group } from '../classes/group';
 
 @Component({
   selector: 'page-home',
@@ -30,9 +30,9 @@ export class HomePage {
 
 	ngOnInit()
 	{
-		console.log(this.navParams.get('userParams'));
-
-		// create object for user and group 
+		let userData = this.navParams.get('userParams').split(',');
+  		let userMember = new Member(parseInt(userData[0]), parseInt(userData[1]), userData[2], parseInt(userData[3]), parseInt(userData[4]));
+  		console.log(userMember); 
 	}
 
 	/**
