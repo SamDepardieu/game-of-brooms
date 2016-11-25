@@ -26,7 +26,7 @@ export class TaskService
 		.catch((error:any) => 'Server error');
 	}
 
-	public addTaskQuery()
+	public addTask()
 	{
 		let dataString = JSON.stringify({"name": "leetchi","color": "maroon"});
 		let headers = new Headers({'Content-Type':'application/json'});

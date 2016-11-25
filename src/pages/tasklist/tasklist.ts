@@ -20,6 +20,11 @@ export class Tasklist {
     {title: 'Titre', deadline:'data', reward:'500xp', author:'Author', doneOrNot:'true'}];
   }
 
+  ngOnInit()
+  {
+    
+  }
+
 
   /**
    * go to taskadd page
