@@ -9,6 +9,7 @@ import { Tasklist } from '../pages/tasklist/tasklist';
 import { Notiflist } from '../pages/notificationlist/notiflist';
 import { Taskadd } from '../pages/taskadd/taskadd';
 import { Taskdetail } from '../pages/taskdetail/taskdetail';
+import { ConnectselectPage } from '../pages/connectselect/connectselect';
 
 // import services 
 import { TaskService } from '../services/task.service';
@@ -22,7 +23,8 @@ import { GroupService } from '../services/group.service';
     Tasklist,
     Notiflist,
     Taskadd,
-    Taskdetail
+    Taskdetail,
+    ConnectselectPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -34,7 +36,8 @@ import { GroupService } from '../services/group.service';
     Tasklist,
     Notiflist,
     Taskadd,
-    Taskdetail
+    Taskdetail,
+    ConnectselectPage
   ],
   providers: [
     Storage,
