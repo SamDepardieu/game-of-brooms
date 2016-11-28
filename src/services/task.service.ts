@@ -4,19 +4,15 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Rx';
+import { GlobalConfig } from '../config/global.var.config'; 
 
 @Injectable()
 export class TaskService
 {
-	private apiUrl = '/fruits';
+	private apiUrl = GlobalConfig.API_URL+'/task';
 	constructor(private http: Http)
 	{
-
-	}
-
-	public doTheJob()
-	{
-		console.log('hello Im a service !');
+		
 	}
 
 	public getTasks()
@@ -35,20 +31,5 @@ export class TaskService
 		return this.http.post(this.apiUrl, dataString, options)
 		.map((res:Response) => res.json())
 		.catch((error:any) => 'Server error');
-	}
-
-	public updateTaskQuery()
-	{
-		console.log('update a task');
-	}
-
-	public deleteTaskQuery()
-	{
-		console.log('delete task');
-	}
-
-	public getTaskByIdQuery()
-	{
-		console.log('get tasks by id');
 	}
 }
