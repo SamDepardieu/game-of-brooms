@@ -22,9 +22,9 @@ export class TaskService
 		.catch((error:any) => 'Server error');
 	}
 
-	public addTask(): any 
+	public addTask(obj: Object): any 
 	{
-		let dataString = JSON.stringify({});
+		let dataString = JSON.stringify(obj);
 		let headers = new Headers({'Content-Type':'application/json'});
 		let options = new RequestOptions({headers: headers});
 
