@@ -12,19 +12,19 @@ export class TaskService
 	private apiUrl = GlobalConfig.API_URL+'/task';
 	constructor(private http: Http)
 	{
-		
+
 	}
 
-	public getTasks()
+	public getTasks(): any  
 	{
 		return this.http.get(this.apiUrl)
 		.map((res:Response) => res.json())
 		.catch((error:any) => 'Server error');
 	}
 
-	public addTask()
+	public addTask(): any 
 	{
-		let dataString = JSON.stringify({"name": "leetchi","color": "maroon"});
+		let dataString = JSON.stringify({});
 		let headers = new Headers({'Content-Type':'application/json'});
 		let options = new RequestOptions({headers: headers});
 

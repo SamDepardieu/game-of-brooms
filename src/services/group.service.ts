@@ -22,9 +22,9 @@ export class GroupService
 		.catch((error:any) => 'Server error'); 
 	}
 
-	public addGroup(name: string): any
+	public addGroup(obj: Object): any
 	{
-		let data = JSON.stringify({"name": ""+name+""});
+		let data = JSON.stringify(obj);
 		let headers = new Headers({'Content-Type':'application/json'});
 		let options = new RequestOptions({headers: headers});
 

@@ -14,6 +14,7 @@ export class Tasklist {
 
 	public items; 
   public taskArray; 
+  public localDeadline;
 
   constructor(private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
 
@@ -29,7 +30,7 @@ export class Tasklist {
         {
           this.taskArray = this.items.task.records; 
           console.log(this.items);
-          console.log(new Date(this.taskArray[10]).toUTCString());
+          this.localDeadline = new Date(this.taskArray[0][10] * 1000).toLocaleString();
         }
       );
   }

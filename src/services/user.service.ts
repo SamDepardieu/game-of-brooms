@@ -24,9 +24,9 @@ export class UserService
 		.catch((err:any) => 'Server error'); 
 	}
 
-	public addUser(name: string, groupId: number, isAdmin: number): any
+	public addUser(obj: Object): any
 	{
-		let data = JSON.stringify({"group_id": ""+groupId+"", "name":""+name+"", "points": 0, "is_admin":""+isAdmin+""});
+		let data = JSON.stringify(obj);
 		let headers = new Headers({'Content-Type':'application/json'});
 		let options = new RequestOptions({headers: headers});
 

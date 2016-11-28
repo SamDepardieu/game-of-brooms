@@ -12,7 +12,7 @@
   <ion-item *ngFor="let task of taskArray" (click)="clickOnItem(task)">
   <h2>{{task[1]}}</h2> 
   <p item-right>{{task[3]}} xp</p> 
-  <!-- <p item-right>{{item.deadline}}</p> -->
+  <p item-right>{{localDeadline}}</p>
   <!-- <h3>{{item.author}}</h3>
   <p item-right>{{item.doneOrNot}}</p>-->
   </ion-item>
