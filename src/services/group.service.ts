@@ -10,6 +10,9 @@ import { GlobalConfig } from '../config/global.var.config';
 export class GroupService
 {
 	private apiUrl = GlobalConfig.API_URL+'/group';
+	public headers = new Headers({'Content-Type':'application/json'});
+	public options = new RequestOptions({headers: this.headers});
+
 	constructor(private http: Http)
 	{
 
@@ -25,10 +28,15 @@ export class GroupService
 	public addGroup(obj: Object): any
 	{
 		let data = JSON.stringify(obj);
-		let headers = new Headers({'Content-Type':'application/json'});
-		let options = new RequestOptions({headers: headers});
 
-		return this.http.post(this.apiUrl, data, options)
+		return this.http.post(this.apiUrl, data, this.options)
+		.map((res:Response) => res.json())
+		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
+	}
+
+	public deleteGroup(id: string): any 
+	{
+		return this.http.delete(this.apiUrl+'/'+id, this.options)
 		.map((res:Response) => res.json())
 		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
 	}
