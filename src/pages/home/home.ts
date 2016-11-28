@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { TaskService } from '../../services/task.service';
 import { GroupService } from '../../services/group.service';
 import { UserService } from '../../services/user.service';
 import { LogService } from '../../services/log.service';
@@ -11,10 +10,6 @@ import { LogService } from '../../services/log.service';
 // Import pages 
 import { Tasklist } from '../tasklist/tasklist';
 import { Notiflist } from '../notificationlist/notiflist';
-
-// Import classes 
-import { Member } from '../classes/member';
-import { Group } from '../classes/group';
 
 @Component({
   selector: 'page-home',
