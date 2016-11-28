@@ -12,7 +12,7 @@ export class TaskService
 	private apiUrl = GlobalConfig.API_URL+'/task';
 	constructor(private http: Http)
 	{
-
+		
 	}
 
 	public getTasks(): any  

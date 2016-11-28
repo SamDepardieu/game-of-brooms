@@ -26,12 +26,7 @@ export class Tasklist {
       .subscribe(
         items => this.items = items,
         err => console.log(err),
-        () => 
-        {
-          this.taskArray = this.items.task.records; 
-          console.log(this.items);
-          this.localDeadline = new Date(this.taskArray[0][10] * 1000).toLocaleString();
-        }
+        () => {}
       );
   }
 
