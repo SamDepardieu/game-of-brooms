@@ -13,6 +13,7 @@ export class Tasklist {
 
 
 	public items; 
+  public taskArray; 
 
   constructor(private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
 
@@ -24,7 +25,12 @@ export class Tasklist {
       .subscribe(
         items => this.items = items,
         err => console.log(err),
-        () => console.log(this.items)
+        () => 
+        {
+          this.taskArray = this.items.task.records; 
+          console.log(this.items);
+          console.log(new Date(this.taskArray[10]).toUTCString());
+        }
       );
   }
 
