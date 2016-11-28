@@ -4,11 +4,14 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Rx';
+import { GlobalConfig } from '../config/global.var.config'; 
+
+
 
 @Injectable()
 export class UserService
 {
-	private apiUrl = 'http://10.176.50.45/www/brooms/api.php/member';
+	private apiUrl = GlobalConfig.API_URL+'/member';
 	constructor(private http: Http)
 	{
 

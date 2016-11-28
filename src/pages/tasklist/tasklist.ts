@@ -15,10 +15,7 @@ export class Tasklist {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-  	// Feed the items array
-    this.items = [{title: 'Titre', deadline:'data', reward:'500xp', author:'Author', doneOrNot:'true'},
-    {title: 'Titre', deadline:'data', reward:'500xp', author:'Author', doneOrNot:'true'}];
-  }
+   }
 
   ngOnInit()
   {

@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Rx';
 @Injectable()
 export class TaskService
 {
-	private apiUrl = 'http://localhost:3000/api/fruits';
+	private apiUrl = '/fruits';
 	constructor(private http: Http)
 	{
 
