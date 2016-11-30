@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home'
 import { UserService } from '../../services/user.service';
+import { PouchDBService } from '../../services/pouchdb.service'; 
 // Import classes 
 // import { Member } from '../classes/member';
 // import { Group } from '../classes/group';
@@ -13,15 +14,15 @@ import { UserService } from '../../services/user.service';
 })
 export class ConnectselectPage {
 
-  constructor(private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(private pouchDBService: PouchDBService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
   public users; 
   public userSelectors;
 
   ngOnInit()
   {
-  	console.log('Initialize');
-  	this.getUsers(); 
+  	// console.log('Initialize');
+  	// this.getUsers(); 
   }
 
   public connect(data): void
@@ -45,4 +46,17 @@ export class ConnectselectPage {
 				}
 			);
 	}
+
+  public testDb(): void 
+  {
+    console.log('test');
+
+    this.pouchDBService.createDb();
+  }
+
+  public postData(): void
+  {
+    console.log('test 1'); 
+    this.pouchDBService.postDb(); 
+  }
 }

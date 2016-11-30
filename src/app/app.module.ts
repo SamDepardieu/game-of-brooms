@@ -16,6 +16,7 @@ import { TaskService } from '../services/task.service';
 import { UserService } from '../services/user.service';
 import { GroupService } from '../services/group.service';
 import { LogService } from '../services/log.service';
+import { PouchDBService } from '../services/pouchdb.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LogService } from '../services/log.service';
     TaskService,
     UserService,
     GroupService,
-    LogService
+    LogService,
+    PouchDBService
   ]
 })
 export class AppModule {}
