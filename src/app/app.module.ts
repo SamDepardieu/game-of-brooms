@@ -9,6 +9,13 @@ import { Tasklist } from '../pages/tasklist/tasklist';
 import { Notiflist } from '../pages/notificationlist/notiflist';
 import { Taskadd } from '../pages/taskadd/taskadd';
 import { Taskdetail } from '../pages/taskdetail/taskdetail';
+import { ConnectselectPage } from '../pages/connectselect/connectselect';
+
+// import services 
+import { TaskService } from '../services/task.service';
+import { UserService } from '../services/user.service';
+import { GroupService } from '../services/group.service';
+import { LogService } from '../services/log.service';
 
 @NgModule({
   declarations: [
@@ -17,10 +24,11 @@ import { Taskdetail } from '../pages/taskdetail/taskdetail';
     Tasklist,
     Notiflist,
     Taskadd,
-    Taskdetail
+    Taskdetail,
+    ConnectselectPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, [LogService])
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,10 +37,15 @@ import { Taskdetail } from '../pages/taskdetail/taskdetail';
     Tasklist,
     Notiflist,
     Taskadd,
-    Taskdetail
+    Taskdetail,
+    ConnectselectPage
   ],
   providers: [
-    Storage
+    Storage,
+    TaskService,
+    UserService,
+    GroupService,
+    LogService
   ]
 })
 export class AppModule {}

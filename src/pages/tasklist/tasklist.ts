@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Taskadd } from '../taskadd/taskadd';
 import { Taskdetail } from '../taskdetail/taskdetail';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'page-tasklist',
@@ -12,12 +13,21 @@ export class Tasklist {
 
 
 	public items; 
+  public taskArray; 
+  public localDeadline;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
 
-  	// Feed the items array
-    this.items = [{title: 'Titre', deadline:'data', reward:'500xp', author:'Author', doneOrNot:'true'},
-    {title: 'Titre', deadline:'data', reward:'500xp', author:'Author', doneOrNot:'true'}];
+   }
+
+  ngOnInit()
+  {
+      this.taskService.getTasks()
+      .subscribe(
+        items => this.items = items,
+        err => console.log(err),
+        () => {}
+      );
   }
 
 
