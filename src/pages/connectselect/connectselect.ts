@@ -4,8 +4,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home'
 import { UserService } from '../../services/user.service';
 // Import classes 
-import { Member } from '../classes/member';
-import { Group } from '../classes/group';
+// import { Member } from '../classes/member';
+// import { Group } from '../classes/group';
 
 @Component({
   selector: 'page-connectselect',
