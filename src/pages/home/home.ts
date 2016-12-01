@@ -1,28 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { Storage }                  from '@ionic/storage';
 
-import { GroupService } from '../../services/group.service';
-import { UserService } from '../../services/user.service';
-import { LogService } from '../../services/log.service';
+import { GroupService }   from '../../services/group.service';
+import { UserService }    from '../../services/user.service';
+import { LogService }     from '../../services/log.service';
 
-// Import pages 
-import { Tasklist } from '../tasklist/tasklist';
-import { Notiflist } from '../notificationlist/notiflist';
+// Import pages
+import { Tasklist }   from '../tasklist/tasklist';
+import { Notiflist }  from '../notificationlist/notiflist';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+
+export class HomePage implements OnInit {
 	public groups;
-	public users; 
-  	constructor(private logService: LogService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams, storage: Storage) 
-  	{
+	public users;
 
-
-	}
+	constructor(private logService: LogService,
+        private groupService: GroupService,
+        private userService: UserService,
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        storage: Storage)
+	{ }
 
 	ngOnInit()
 	{
@@ -31,7 +35,7 @@ export class HomePage {
 	}
 
 	/**
-	 * Go to the taskl list page 
+	 * Go to the taskl list page
 	 */
 	public goToTaskList()
 	{
@@ -39,11 +43,11 @@ export class HomePage {
 	}
 
 	/**
-	 * Go to the notif list page 
+	 * Go to the notif list page
 	 */
 	public goToNotifList()
 	{
-		this.navCtrl.push(Notiflist); 
+		this.navCtrl.push(Notiflist);
 	}
 
 	public getGroups(): void
@@ -70,7 +74,7 @@ export class HomePage {
 	public getUsers(): void
 	{
 		this.userService.getUsers()
-			.subscribe(	
+			.subscribe(
 				users => this.users = users,
 				err => console.log(err),
 				() => console.log(this.users)
@@ -89,4 +93,3 @@ export class HomePage {
 			);
 	}
 }
-    
