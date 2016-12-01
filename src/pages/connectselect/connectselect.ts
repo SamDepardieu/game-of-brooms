@@ -71,4 +71,10 @@ export class ConnectselectPage {
     console.log('get'); 
     console.log(this.pouchDBService.getDb());
   }
+
+  public getOne()
+  {
+    console.log('get one'); 
+    this.pouchDBService.getOne();
+  }
 }

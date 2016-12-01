@@ -17,7 +17,8 @@ export class PouchDBService
 	{
 		this.db = new PouchDB('test_db');
 		console.log('db created'); 
-		this.remoteDb = new PouchDB("http://10.176.50.89:8000/brooms");
+		this.remoteDb = new PouchDB("http://192.168.43.190:8000/brooms");
+		// this.remoteDb = new PouchDB("http://10.176.50.89:8000/brooms");
 		console.log('db remote created');
 
 		
@@ -57,7 +58,7 @@ this.dbSync = this.db.sync(this.remoteDb,
 		    console.log(error);
 		  })
 	}
-	
+
 	public getDb()
 	{
 			return this.db.allDocs({include_docs: true}).catch((error) => 
@@ -67,10 +68,16 @@ this.dbSync = this.db.sync(this.remoteDb,
 	}
 	public postDb()
 	{
-		this.db.post(
+		this.db.put(
 		{
-			name: "Benoit",
-			color: "Red"
+			_id:"ameliapcarpenter@dayrep.com",
+			type:"user",
+			name:"Amelia P. Carpenter",
+			created:Date.now(),
+			updated:Date.now(),
+			points:0, 
+			isAdmin:true 
+
 		}).then((response) => 
 		{
 			console.log('response', response);
@@ -80,4 +87,25 @@ this.dbSync = this.db.sync(this.remoteDb,
 			console.error(error);
 		});
 	}
+	public getOne() 
+	{
+		this.db.get('ameliapcarpenter@dayrep.com').then((doc) => 
+		{
+			console.log(doc);
+		}).catch((err) =>
+		{
+			console.log(err); 
+		});
+	}
 }
+
+// user
+// {
+//     "_id":"address mail",
+//     "type":"user",
+//     "name":"text",
+//     "created":1234, // int / timestamp
+//     "updated":1234, // int / timestamp, last modif
+//     "points":1234, // int
+//     "isAdmin":true // bool
+// }
