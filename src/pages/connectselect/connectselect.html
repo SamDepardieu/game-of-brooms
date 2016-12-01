@@ -16,10 +16,11 @@
     </ion-select>
   </ion-item>
   <ion-item>
-  	
 <button *ngIf="userChoice" ion-button color="secondary" (click)="connect(userChoice)">Connect</button>
 
-<button ion-button (click)="testDb()">Test db</button>
+<button ion-button (click)="testDb()">Create db</button>
+<button ion-button (click)="syncDb()">Sync Db</button>
 <button ion-button (click)="postData()">post Data</button>
+<button ion-button (click)="getData()">get data</button>
   </ion-item>
 </ion-list></ion-content>

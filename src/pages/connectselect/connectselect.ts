@@ -54,9 +54,21 @@ export class ConnectselectPage {
     this.pouchDBService.createDb();
   }
 
+  public syncDb()
+  {
+    console.log('syncDb');
+    this.pouchDBService.syncDb();
+  }
+
   public postData(): void
   {
-    console.log('test 1'); 
-    this.pouchDBService.postDb(); 
+    console.log('post'); 
+    console.log(this.pouchDBService.postDb()); 
+  }
+
+  public getData()
+  {
+    console.log('get'); 
+    console.log(this.pouchDBService.getDb());
   }
 }

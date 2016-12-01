@@ -17,10 +17,15 @@ export class PouchDBService
 	{
 		this.db = new PouchDB('test_db');
 		console.log('db created'); 
-		this.remoteDb = new PouchDB("http://10.176.50.120:8000/brooms");
+		this.remoteDb = new PouchDB("http://10.176.50.89:8000/brooms");
 		console.log('db remote created');
 
-		this.dbSync = this.db.sync(this.remoteDb, 
+		
+	}
+
+	public syncDb()
+	{
+this.dbSync = this.db.sync(this.remoteDb, 
 		{
 			live: true,
 			retry: true
@@ -52,20 +57,23 @@ export class PouchDBService
 		    console.log(error);
 		  })
 	}
-
+	
+	public getDb()
+	{
+			return this.db.allDocs({include_docs: true}).catch((error) => 
+		{
+			console.error(error);
+		});
+	}
 	public postDb()
 	{
 		this.db.post(
 		{
 			name: "Benoit",
 			color: "Red"
-		}).then(() =>
-		{
-			console.log('document created');
-			return this.db.allDocs({include_docs: true});
 		}).then((response) => 
 		{
-			console.log(response);
+			console.log('response', response);
 		})
 		.catch((error) => 
 		{
