@@ -1,9 +1,6 @@
 // Angular Import 
 import { Injectable } from '@angular/core';
 
-// Import Config 
-import { GlobalConfig } from '../config/global.var.config';
-
 // Services Import  
 import { PouchDBService } from './pouchdb.service'; 
 
