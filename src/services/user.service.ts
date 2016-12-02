@@ -14,23 +14,23 @@ export class UserService
 
 	public get(id: string): any
 	{
-		this._db.get(id).then((doc) =>
+		return this._db.get(id).then((response) => 
 		{
-			console.log(doc);
+			return response;
 		}).catch((error) =>
 		{
-			console.error(error);
-		});
+			throw error; 
+		});;
 	}
 
 	public add(obj: Object): any
 	{
 		this._db.put(obj).then((response) => 
 		{
-			console.log(response);
+			return response;
 		}).catch((error) =>
 		{
-			console.error(error); 
+			throw error; 
 		});
 	}
 

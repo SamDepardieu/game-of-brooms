@@ -14,8 +14,7 @@ export class ConnectselectPage
 	public userMail; 
 	public newUserMail;
 	public newUserName; 
-	// public users; 
-	// public userSelectors;  
+
 	constructor(private pouchdbService: PouchDBService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
 	ngOnInit()
@@ -26,12 +25,17 @@ export class ConnectselectPage
 
 	public connect(): void
 	{
-		// this.navCtrl.push(HomePage, 
-		// {
-		// 	userParams: data 
-		// });
-		console.log(this.userMail);
-		this.userService.get(this.userMail); 
+		let connect = this.userService.get(this.userMail).then((response) => 
+		{
+			this.navCtrl.push(HomePage, 
+			{
+				userParams: this.userMail
+			});
+		})
+		.catch((error) => 
+		{
+			console.error(error);
+		});
 	}
 
 	public signup(): void
@@ -47,6 +51,12 @@ export class ConnectselectPage
 			isAdmin: false
 		};
 
-		this.userService.add(newUser);
+		this.userService.add(newUser).then((response) => 
+		{
+			console.log(response);
+		}).catch((error) =>
+		{
+			console.error(error); 
+		});
 	}
 }
