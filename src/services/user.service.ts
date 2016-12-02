@@ -1,45 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import {Observable} from 'rxjs/Rx';
 import { GlobalConfig } from '../config/global.var.config'; 
-
-
+import { PouchDBService } from './pouchdb.service'; 
 
 @Injectable()
 export class UserService
 {
-	private apiUrl = GlobalConfig.API_URL+'/member';
-	public headers = new Headers({'Content-Type':'application/json'});
-	public options = new RequestOptions({headers: this.headers});
+	private _db;
 
-	constructor(private http: Http)
+	constructor(private pouchdbService: PouchDBService)
 	{
-
+		this._db = this.pouchdbService.db;
 	}
 
-	public getUsers(): any
+	public get(id: string): any
 	{
-		return this.http.get(this.apiUrl)
-		.map((res:Response) => res.json())
-		.catch((err:any) => 'Server error'); 
+		this._db.get(id).then((doc) =>
+		{
+			console.log(doc);
+		}).catch((error) =>
+		{
+			console.error(error);
+		});
 	}
 
-	public addUser(obj: Object): any
+	public add(obj: Object): any
 	{
-		let data = JSON.stringify(obj);
-
-		return this.http.post(this.apiUrl, data, this.options)
-		.map((res:Response) => res.json())
-		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
+		this._db.put(JSON.stringify(obj)).then((response) => 
+		{
+			console.log(response);
+		}).catch((error) =>
+		{
+			console.error(error); 
+		});
 	}
 
-	public deleteUser(id: string): any
+	public delete(id: string): any
 	{
-		return this.http.delete(this.apiUrl+'/'+id, this.options)
-		.map((res:Response) => res.json())
-		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
 	}
 }

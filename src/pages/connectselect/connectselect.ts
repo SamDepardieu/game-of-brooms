@@ -4,77 +4,52 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home'
 import { UserService } from '../../services/user.service';
 import { PouchDBService } from '../../services/pouchdb.service'; 
-// Import classes 
-// import { Member } from '../classes/member';
-// import { Group } from '../classes/group';
 
 @Component({
-  selector: 'page-connectselect',
-  templateUrl: 'connectselect.html'
+	selector: 'page-connectselect',
+	templateUrl: 'connectselect.html'
 })
-export class ConnectselectPage {
+export class ConnectselectPage 
+{
+	public userMail; 
+	public newUserMail;
+	public newUserName; 
+	// public users; 
+	// public userSelectors;  
+	constructor(private pouchdbService: PouchDBService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
-  constructor(private pouchDBService: PouchDBService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
-
-  public users; 
-  public userSelectors;
-
-  ngOnInit()
-  {
-  	// console.log('Initialize');
-  	// this.getUsers(); 
-  }
-
-  public connect(data): void
-  {
-  	this.navCtrl.push(HomePage, 
-  		{
-  			userParams: data 
-  		});
-  }
-
-  public getUsers(): void
+	ngOnInit()
 	{
-		this.userService.getUsers()
-			.subscribe(	
-				users => this.users = users,
-				err => console.log(err),
-				() => 
-				{
-					console.log(this.users);
-					this.userSelectors = this.users.member.records;
-				}
-			);
+		// this.pouchdbService.create(); 
+		this.pouchdbService.sync(); 
+		console.log()
 	}
 
-  public testDb(): void 
-  {
-    console.log('test');
+	public connect(): void
+	{
+		// this.navCtrl.push(HomePage, 
+		// {
+		// 	userParams: data 
+		// });
+		console.log(this.userMail);
+		this.userService.get(this.userMail); 
+	}
 
-    this.pouchDBService.createDb();
-  }
+	public signup(): void
+	{
 
-  public syncDb()
-  {
-    console.log('syncDb');
-    this.pouchDBService.syncDb();
-  }
-
-  public postData(): void
-  {
-    console.log('post'); 
-    console.log(this.pouchDBService.postDb()); 
-  }
-
-  public getData()
-  {
-    console.log('get'); 
-    console.log(this.pouchDBService.getDb());
-  }
-
-  public getOne()
-  {
-    console.log('get one'); 
-    this.pouchDBService.getOne();
-  }
+	}
 }
+
+
+
+// user
+// {
+//     "_id":"address mail",
+//     "type":"user",
+//     "name":"text",
+//     "created":1234, // int / timestamp
+//     "updated":1234, // int / timestamp, last modif
+//     "points":1234, // int
+//     "isAdmin":true // bool
+// }

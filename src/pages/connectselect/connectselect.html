@@ -8,21 +8,26 @@
 
 
 <ion-content padding>
+<h2>Login</h2>
 <ion-list>
   <ion-item>
-    <ion-label>User Choice</ion-label>
-    <ion-select [(ngModel)]="userChoice">
-      <ion-option *ngFor="let user of userSelectors" value="{{user}}">{{user[2]}}</ion-option>
-    </ion-select>
+    <ion-label color="primary">Mail Adress</ion-label>
+    <ion-input [(ngModel)]="userMail" placeholder="mail.adress@mail.com"></ion-input>
   </ion-item>
   <ion-item>
-<button *ngIf="userChoice" ion-button color="secondary" (click)="connect(userChoice)">Connect</button>
-
-<button ion-button (click)="testDb()">Create db</button>
-<button ion-button (click)="syncDb()">Sync Db</button>
-<button ion-button (click)="postData()">post Data</button>
-<button ion-button (click)="getData()">get data</button>
-<button ion-button (click)="getOne()">get one</button>
-
+    <button *ngIf="userMail" ion-button color="secondary" (click)="connect()">Connect</button>
   </ion-item>
-</ion-list></ion-content>
+</ion-list>
+
+<h2>Signup</h2>
+<ion-list>
+  <ion-item><ion-label color="primary">Mail Adress</ion-label>
+    <ion-input [(ngModel)]="newUserMail" placeholder="mail.adress@mail.com"></ion-input></ion-item>
+  <ion-item> <ion-label color="primary">Name</ion-label>
+    <ion-input [(ngModel)]="newUserName" placeholder="User Name"></ion-input></ion-item>
+    <ion-item><button *ngIf="newUserMail && newUserName" ion-button color="secondary" (click)="signup()">Connect</button></ion-item>
+    
+
+   
+</ion-list>
+</ion-content>

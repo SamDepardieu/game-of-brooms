@@ -1,38 +1,43 @@
 import { Injectable } from '@angular/core';
 
+import { GlobalConfig } from '../config/global.var.config'; 
 import * as PouchDB from 'pouchdb';
 
 @Injectable()
 export class PouchDBService
 {
-	private db; 
-	private remoteDb; 
-	private dbSync;
+	// Put a check if a db already exists 
+	private _db; 
+	private _remoteDb; 
+	private _dbSync;
+
 	constructor()
 	{
-
+		this._db = new PouchDB('broom_db');
+		console.log('db created'); 
+		this._remoteDb = new PouchDB(GlobalConfig.API_URL);
+		console.log('db remote created');
 	}
 
-	public createDb()
+	public get db() 
 	{
-		this.db = new PouchDB('test_db');
-		console.log('db created'); 
-		this.remoteDb = new PouchDB("http://192.168.43.190:8000/brooms");
-		// this.remoteDb = new PouchDB("http://10.176.50.89:8000/brooms");
-		console.log('db remote created');
+		return this._db;
+	}
 
+	public create()
+	{
 		
 	}
 
-	public syncDb()
+	public sync()
 	{
-this.dbSync = this.db.sync(this.remoteDb, 
+		this._dbSync = this._db.sync(this._remoteDb, 
 		{
 			live: true,
 			retry: true
 		});
 
-		this.dbSync.on("change", function(info) {
+		this._dbSync.on("change", function(info) {
 		    // La réplication a créé ou modifié un document
 		    console.log("On change");
 		    console.log(info);
@@ -59,16 +64,20 @@ this.dbSync = this.db.sync(this.remoteDb,
 		  })
 	}
 
+
+
+
+	// TEST AND DEBUG 
 	public getDb()
 	{
-			return this.db.allDocs({include_docs: true}).catch((error) => 
+			return this._db.allDocs({include_docs: true}).catch((error) => 
 		{
 			console.error(error);
 		});
 	}
 	public postDb()
 	{
-		this.db.put(
+		this._db.put(
 		{
 			_id:"ameliapcarpenter@dayrep.com",
 			type:"user",
@@ -89,7 +98,7 @@ this.dbSync = this.db.sync(this.remoteDb,
 	}
 	public getOne() 
 	{
-		this.db.get('ameliapcarpenter@dayrep.com').then((doc) => 
+		this._db.get('ameliapcarpenter@dayrep.com').then((doc) => 
 		{
 			console.log(doc);
 		}).catch((err) =>
@@ -98,14 +107,3 @@ this.dbSync = this.db.sync(this.remoteDb,
 		});
 	}
 }
-
-// user
-// {
-//     "_id":"address mail",
-//     "type":"user",
-//     "name":"text",
-//     "created":1234, // int / timestamp
-//     "updated":1234, // int / timestamp, last modif
-//     "points":1234, // int
-//     "isAdmin":true // bool
-// }
