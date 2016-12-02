@@ -7,6 +7,7 @@ import { HomePage } from '../home/home';
 
 // Services Import 
 import { UserService } from '../../services/user.service';
+import { GroupService } from '../../services/group.service'; 
 import { PouchDBService } from '../../services/pouchdb.service'; 
 
 @Component({
@@ -32,19 +33,26 @@ export class ConnectselectPage
 	public newUserMail: string;
 
 	/**
-	 * the signup user name 
+	 * The signup user name 
 	 * @type {string}
 	 */
 	public newUserName: string; 
 
 	/**
+	 * The new group name 
+	 * @type {string}
+	 */
+	public groupName: string;
+
+	/**
 	 * The ConnectselectPage constructor 
 	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods
 	 * @param {UserService}    private userService    Service use to manipulate user data 
+	 * @param {GroupService}   private groupService	  Service use to manipulate group data 
 	 * @param {NavController}  public  navCtrl        Nav controller for routing 
 	 * @param {NavParams}      public  navParams      Nav params for data bindings in routing
 	 */
-	constructor(private pouchdbService: PouchDBService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
+	constructor(private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
 	/**
 	 * Angular onInit function 
@@ -94,6 +102,32 @@ export class ConnectselectPage
 		{
 			console.log('User added', response);
 		}).catch((error) =>
+		{
+			console.error(error); 
+		});
+	}
+
+	public createNewGroup(): void
+	{
+		let newGroup = 
+		{
+			_id: this.groupName,
+			type: 'group',
+			name: this.groupName,
+			created: Date.now(),
+			updated: Date.now(),
+			adminIp: '',
+			users: 
+			[
+				'ameliapcarpenter@dayrep.com',
+				'shandrawpeeples@rhyta.com'
+			]
+		};
+
+		this.groupService.add(newGroup).then((response) =>
+		{
+			console.log('Group added', response);
+		}).catch((error) => 
 		{
 			console.error(error); 
 		});

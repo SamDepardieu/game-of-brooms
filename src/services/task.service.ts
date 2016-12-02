@@ -1,43 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import {Observable} from 'rxjs/Rx';
 import { GlobalConfig } from '../config/global.var.config'; 
+import { PouchDBService } from './pouchdb.service'; 
 
 @Injectable()
 export class TaskService
 {
-	private apiUrl = GlobalConfig.API_URL+'/task';
-	public headers = new Headers({'Content-Type':'application/json'});
-	public options = new RequestOptions({headers: this.headers});
 
-	constructor(private http: Http)
+	constructor()
 	{
 
 	}
 
-	public getTasks(): any  
-	{
-		return this.http.get(this.apiUrl)
-		.map((res:Response) => res.json())
-		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
-	}
+	public getAll(): any 
+	{}
 
-	public addTask(obj: Object): any 
-	{
-		let dataString = JSON.stringify(obj);
+	public get(id: string): any  
+	{}
 
-		return this.http.post(this.apiUrl, dataString, this.options)
-		.map((res:Response) => res.json())
-		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
-	}
+	public add(obj: Object): any 
+	{}
 
-	public deleteTask(id: string): any
-	{
-		return this.http.delete(this.apiUrl+'/'+id, this.options)
-		.map((res:Response) => res.json())
-		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
-	}
+	public delete(id: string): any
+	{}
 }

@@ -88,6 +88,6 @@ export class PouchDBService
 		    // La réplication s'est arrêtée en raison d'une erreur irrécupérable
 		    console.log("On error");
 		    console.log(error);
-		  })
+		  });
 	}
 }

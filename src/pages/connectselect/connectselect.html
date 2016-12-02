@@ -26,8 +26,13 @@
   <ion-item> <ion-label color="primary">Name</ion-label>
     <ion-input [(ngModel)]="newUserName" placeholder="User Name"></ion-input></ion-item>
     <ion-item><button *ngIf="newUserMail && newUserName" ion-button color="secondary" (click)="signup()">Signup</button></ion-item>
-    
+    </ion-list>
 
-   
-</ion-list>
+    <h2>Group</h2>
+    <ion-list>
+      <ion-item><ion-label color="primary">Group Name</ion-label>
+    <ion-input [(ngModel)]="groupName" placeholder="Group Name"></ion-input></ion-item>
+    <ion-item><button *ngIf="groupName" ion-button color="secondary" (click)="createNewGroup()">Add a group</button></ion-item>
+    </ion-list>
+
 </ion-content>
