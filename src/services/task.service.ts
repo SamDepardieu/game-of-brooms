@@ -1,43 +1,82 @@
+// Angular Import 
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import {Observable} from 'rxjs/Rx';
-import { GlobalConfig } from '../config/global.var.config'; 
+
+// Services import 
+import { PouchDBService } from './pouchdb.service'; 
 
 @Injectable()
+/**
+ * The TaskService class / service 
+ * @type {TaskService}
+ */
 export class TaskService
 {
-	private apiUrl = GlobalConfig.API_URL+'/task';
-	public headers = new Headers({'Content-Type':'application/json'});
-	public options = new RequestOptions({headers: this.headers});
+	/**
+	 * The local db var 
+	 * @type {PouchDB}
+	 */
+	private _db; 
 
-	constructor(private http: Http)
+	/**
+	 * The TaskService constructor 
+	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods 
+	 */
+	constructor(private pouchdbService: PouchDBService)
 	{
-
+		this._db = this.pouchdbService.db; 
 	}
 
-	public getTasks(): any  
+	public getAll(): any 
+	{}
+
+	public validate(): any 
+	{}
+
+	/**
+	 * Get a task function 
+	 * @param  {string} id The id of a task 
+	 * @return {any}       Object with the docs 
+	 */
+	public get(id: string): any  
 	{
-		return this.http.get(this.apiUrl)
-		.map((res:Response) => res.json())
-		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
+		return this._db.get(id).then((response) => 
+		{
+			return response;
+		}).catch((error) =>
+		{
+			throw error; 
+		});
 	}
 
-	public addTask(obj: Object): any 
+	/**
+	 * Add a task function 
+	 * @param  {Object} obj The task to add 
+	 * @return {any}        Object with the docs 
+	 */
+	public add(obj: Object): any 
 	{
-		let dataString = JSON.stringify(obj);
-
-		return this.http.post(this.apiUrl, dataString, this.options)
-		.map((res:Response) => res.json())
-		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
+		return this._db.put(obj).then((response) => 
+		{
+			return response;
+		}).catch((error) =>
+		{
+			throw error; 
+		});
 	}
 
-	public deleteTask(id: string): any
+	/**
+	 * Remove a task function 
+	 * @param  {string} doc The task to remove
+	 * @return {any}        Object with the docs 
+	 */
+	public remove(doc: string): any
 	{
-		return this.http.delete(this.apiUrl+'/'+id, this.options)
-		.map((res:Response) => res.json())
-		.catch((error:any) => Observable.throw(error.json() || 'Server error'));
+		return this._db.remove(doc).then((response) => 
+		{
+			return response;
+		}).catch((error) =>
+		{
+			throw error; 
+		});
 	}
 }
