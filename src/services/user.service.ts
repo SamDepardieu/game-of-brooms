@@ -25,7 +25,7 @@ export class UserService
 
 	public add(obj: Object): any
 	{
-		this._db.put(JSON.stringify(obj)).then((response) => 
+		this._db.put(obj).then((response) => 
 		{
 			console.log(response);
 		}).catch((error) =>

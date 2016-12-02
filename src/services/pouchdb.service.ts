@@ -68,42 +68,42 @@ export class PouchDBService
 
 
 	// TEST AND DEBUG 
-	public getDb()
-	{
-			return this._db.allDocs({include_docs: true}).catch((error) => 
-		{
-			console.error(error);
-		});
-	}
-	public postDb()
-	{
-		this._db.put(
-		{
-			_id:"ameliapcarpenter@dayrep.com",
-			type:"user",
-			name:"Amelia P. Carpenter",
-			created:Date.now(),
-			updated:Date.now(),
-			points:0, 
-			isAdmin:true 
+	// public getDb()
+	// {
+	// 		return this._db.allDocs({include_docs: true}).catch((error) => 
+	// 	{
+	// 		console.error(error);
+	// 	});
+	// }
+	// public postDb()
+	// {
+	// 	this._db.put(
+	// 	{
+	// 		_id:"ameliapcarpenter@dayrep.com",
+	// 		type:"user",
+	// 		name:"Amelia P. Carpenter",
+	// 		created:Date.now(),
+	// 		updated:Date.now(),
+	// 		points:0, 
+	// 		isAdmin:true 
 
-		}).then((response) => 
-		{
-			console.log('response', response);
-		})
-		.catch((error) => 
-		{
-			console.error(error);
-		});
-	}
-	public getOne() 
-	{
-		this._db.get('ameliapcarpenter@dayrep.com').then((doc) => 
-		{
-			console.log(doc);
-		}).catch((err) =>
-		{
-			console.log(err); 
-		});
-	}
+	// 	}).then((response) => 
+	// 	{
+	// 		console.log('response', response);
+	// 	})
+	// 	.catch((error) => 
+	// 	{
+	// 		console.error(error);
+	// 	});
+	// }
+	// public getOne() 
+	// {
+	// 	this._db.get('ameliapcarpenter@dayrep.com').then((doc) => 
+	// 	{
+	// 		console.log(doc);
+	// 	}).catch((err) =>
+	// 	{
+	// 		console.log(err); 
+	// 	});
+	// }
 }

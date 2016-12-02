@@ -20,7 +20,6 @@ export class ConnectselectPage
 
 	ngOnInit()
 	{
-		// this.pouchdbService.create(); 
 		this.pouchdbService.sync(); 
 		console.log()
 	}
@@ -37,19 +36,17 @@ export class ConnectselectPage
 
 	public signup(): void
 	{
+		let newUser = 
+		{ 
+			_id: this.newUserMail,
+			type: 'user',
+			name: this.newUserName,
+			created: Date.now(),
+			updated: Date.now(),
+			points: 0, 
+			isAdmin: false
+		};
 
+		this.userService.add(newUser);
 	}
 }
-
-
-
-// user
-// {
-//     "_id":"address mail",
-//     "type":"user",
-//     "name":"text",
-//     "created":1234, // int / timestamp
-//     "updated":1234, // int / timestamp, last modif
-//     "points":1234, // int
-//     "isAdmin":true // bool
-// }
