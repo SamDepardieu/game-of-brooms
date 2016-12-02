@@ -1,35 +1,62 @@
+// Angular Import 
 import { Injectable } from '@angular/core';
 
+// Import Config 
 import { GlobalConfig } from '../config/global.var.config'; 
+
+// Import PouchDB 
 import * as PouchDB from 'pouchdb';
 
 @Injectable()
+/**
+ * The PouchDBService class / service 
+ * @type {[type]}
+ */
 export class PouchDBService
 {
 	// Put a check if a db already exists 
+	/**
+	 * The local db 
+	 * @type {PouchDB}
+	 */
 	private _db; 
+
+	/**
+	 * The remote db 
+	 * @type {PouchDB}
+	 */
 	private _remoteDb; 
+
+	/**
+	 * The dbsync object 
+	 * @type {any}
+	 */
 	private _dbSync;
 
+	/**
+	 * The PouchDBService constructor 
+	 */
 	constructor()
 	{
 		this._db = new PouchDB('broom_db');
 		console.log('db created'); 
+
 		this._remoteDb = new PouchDB(GlobalConfig.API_URL);
 		console.log('db remote created');
 	}
 
-	public get db() 
+	/**
+	 * The _db getter 
+	 */
+	public get db(): any
 	{
 		return this._db;
 	}
 
-	public create()
-	{
-		
-	}
-
-	public sync()
+	/**
+	 * The sync method for remote and local dbs 
+	 */
+	public sync(): void 
 	{
 		this._dbSync = this._db.sync(this._remoteDb, 
 		{
@@ -63,47 +90,4 @@ export class PouchDBService
 		    console.log(error);
 		  })
 	}
-
-
-
-
-	// TEST AND DEBUG 
-	// public getDb()
-	// {
-	// 		return this._db.allDocs({include_docs: true}).catch((error) => 
-	// 	{
-	// 		console.error(error);
-	// 	});
-	// }
-	// public postDb()
-	// {
-	// 	this._db.put(
-	// 	{
-	// 		_id:"ameliapcarpenter@dayrep.com",
-	// 		type:"user",
-	// 		name:"Amelia P. Carpenter",
-	// 		created:Date.now(),
-	// 		updated:Date.now(),
-	// 		points:0, 
-	// 		isAdmin:true 
-
-	// 	}).then((response) => 
-	// 	{
-	// 		console.log('response', response);
-	// 	})
-	// 	.catch((error) => 
-	// 	{
-	// 		console.error(error);
-	// 	});
-	// }
-	// public getOne() 
-	// {
-	// 	this._db.get('ameliapcarpenter@dayrep.com').then((doc) => 
-	// 	{
-	// 		console.log(doc);
-	// 	}).catch((err) =>
-	// 	{
-	// 		console.log(err); 
-	// 	});
-	// }
 }

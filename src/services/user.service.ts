@@ -10,7 +10,7 @@ import { PouchDBService } from './pouchdb.service';
 @Injectable()
 /**
  * The UserService class / service 
- * @type {[type]}
+ * @type {UserService}
  */
 export class UserService
 {
