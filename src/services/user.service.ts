@@ -20,7 +20,7 @@ export class UserService
 		}).catch((error) =>
 		{
 			throw error; 
-		});;
+		});
 	}
 
 	public add(obj: Object): any

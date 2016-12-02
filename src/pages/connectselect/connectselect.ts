@@ -1,7 +1,11 @@
+// Angular Import 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { HomePage } from '../home/home'
+// Pages Import 
+import { HomePage } from '../home/home';
+
+// Services Import 
 import { UserService } from '../../services/user.service';
 import { PouchDBService } from '../../services/pouchdb.service'; 
 
@@ -11,18 +15,45 @@ import { PouchDBService } from '../../services/pouchdb.service';
 })
 export class ConnectselectPage 
 {
-	public userMail; 
-	public newUserMail;
-	public newUserName; 
+	/**
+	 * The login user mail 
+	 * @type {string}
+	 */
+	public userMail: string; 
 
+	/**
+	 * The signup user mail
+	 * @type {string}
+	 */
+	public newUserMail: string;
+
+	/**
+	 * the signup user name 
+	 * @type {string}
+	 */
+	public newUserName: string; 
+
+	/**
+	 * The ConnectselectPage constructor 
+	 * @param {PouchDBService} private pouchdbService [description]
+	 * @param {UserService}    private userService    [description]
+	 * @param {NavController}  public  navCtrl        [description]
+	 * @param {NavParams}      public  navParams      [description]
+	 */
 	constructor(private pouchdbService: PouchDBService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
+	/**
+	 * Angular onInit function 
+	 */
 	ngOnInit()
 	{
 		this.pouchdbService.sync(); 
 		console.log()
 	}
 
+	/**
+	 * The connect function map to the connect button 
+	 */
 	public connect(): void
 	{
 		let connect = this.userService.get(this.userMail).then((response) => 
@@ -38,6 +69,9 @@ export class ConnectselectPage
 		});
 	}
 
+	/**
+	 * The signup function map to the signup button
+	 */
 	public signup(): void
 	{
 		let newUser = 
