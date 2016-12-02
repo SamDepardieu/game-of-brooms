@@ -13,6 +13,10 @@ import { PouchDBService } from '../../services/pouchdb.service';
 	selector: 'page-connectselect',
 	templateUrl: 'connectselect.html'
 })
+/**
+ * The ConnectselectPage class / component 
+ * @type {ConnectselectPage}
+ */
 export class ConnectselectPage 
 {
 	/**
@@ -35,10 +39,10 @@ export class ConnectselectPage
 
 	/**
 	 * The ConnectselectPage constructor 
-	 * @param {PouchDBService} private pouchdbService [description]
-	 * @param {UserService}    private userService    [description]
-	 * @param {NavController}  public  navCtrl        [description]
-	 * @param {NavParams}      public  navParams      [description]
+	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods
+	 * @param {UserService}    private userService    Service use to manipulate user data 
+	 * @param {NavController}  public  navCtrl        Nav controller for routing 
+	 * @param {NavParams}      public  navParams      Nav params for data bindings in routing
 	 */
 	constructor(private pouchdbService: PouchDBService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
@@ -47,8 +51,8 @@ export class ConnectselectPage
 	 */
 	ngOnInit()
 	{
-		this.pouchdbService.sync(); 
-		console.log()
+		// Launch the sync for the remote and local dbs
+		this.pouchdbService.sync();
 	}
 
 	/**
@@ -58,6 +62,7 @@ export class ConnectselectPage
 	{
 		let connect = this.userService.get(this.userMail).then((response) => 
 		{
+			console.log('Connection', response);
 			this.navCtrl.push(HomePage, 
 			{
 				userParams: this.userMail
@@ -87,7 +92,7 @@ export class ConnectselectPage
 
 		this.userService.add(newUser).then((response) => 
 		{
-			console.log(response);
+			console.log('User added', response);
 		}).catch((error) =>
 		{
 			console.error(error); 
