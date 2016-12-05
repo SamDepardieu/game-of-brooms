@@ -64,30 +64,30 @@ export class PouchDBService
 			retry: true
 		});
 
-		this._dbSync.on("change", function(info) {
-		    // La réplication a créé ou modifié un document
-		    console.log("On change");
-		    console.log(info);
-		  }).on("complete", function(info) {
-		    // La réplication a été terminée ou annulée
-		    console.log("On complete");
-		    console.log(info);
-		  }).on("paused", function(error) {
-		    // La réplication est en pause (la base de données est à jour ou l'utilisateur est offline)
-		    console.log("On paused");
-		    console.log(error);
-		  }).on("active", function() {
-		    // La réplication reprend (nouvelles modifications de réplication ou l'utilisateur est de retour online)
-		    console.log("On active");
-		    console.log("active");
-		  }).on("denied", function(error) {
-		    // Un document n'a pas réussi à se répliquer
-		    console.log("On denied");
-		    console.log(error);
-		  }).on("error", function(error) {
-		    // La réplication s'est arrêtée en raison d'une erreur irrécupérable
-		    console.log("On error");
-		    console.log(error);
-		  });
-	}
+	// 	this._dbSync.on("change", function(info) {
+	// 	    // La réplication a créé ou modifié un document
+	// 	    console.log("On change");
+	// 	    console.log(info);
+	// 	  }).on("complete", function(info) {
+	// 	    // La réplication a été terminée ou annulée
+	// 	    console.log("On complete");
+	// 	    console.log(info);
+	// 	  }).on("paused", function(error) {
+	// 	    // La réplication est en pause (la base de données est à jour ou l'utilisateur est offline)
+	// 	    console.log("On paused");
+	// 	    console.log(error);
+	// 	  }).on("active", function() {
+	// 	    // La réplication reprend (nouvelles modifications de réplication ou l'utilisateur est de retour online)
+	// 	    console.log("On active");
+	// 	    console.log("active");
+	// 	  }).on("denied", function(error) {
+	// 	    // Un document n'a pas réussi à se répliquer
+	// 	    console.log("On denied");
+	// 	    console.log(error);
+	// 	  }).on("error", function(error) {
+	// 	    // La réplication s'est arrêtée en raison d'une erreur irrécupérable
+	// 	    console.log("On error");
+	// 	    console.log(error);
+	// 	  });
+	// }
 }
