@@ -1,14 +1,23 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic taskAdd
+      Add a task page 
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+  	<ion-item>
+  		<ion-label color="primary">Task name</ion-label>
+    	<ion-input placeholder="task name"></ion-input>
+  	</ion-item><ion-item>
+  		<ion-label color="primary">Description</ion-label>
+    	<ion-input placeholder="description"></ion-input>
+  	</ion-item>
+  	<ion-item>
+  		<ion-label color="primary">Points</ion-label>
+    	<ion-input placeholder="10"></ion-input>
+  	</ion-item>
+  </ion-list>
 </ion-content>
