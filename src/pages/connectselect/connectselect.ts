@@ -9,6 +9,7 @@ import { HomePage } from '../home/home';
 import { UserService } from '../../services/user.service';
 import { GroupService } from '../../services/group.service'; 
 import { PouchDBService } from '../../services/pouchdb.service'; 
+import { LogService } from '../../services/log.service'; 
 
 @Component({
 	selector: 'page-connectselect',
@@ -46,13 +47,14 @@ export class ConnectselectPage
 
 	/**
 	 * The ConnectselectPage constructor 
+	 * @param {LogService}	   private lgoService     Service use to call LogService methods
 	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods
 	 * @param {UserService}    private userService    Service use to manipulate user data 
 	 * @param {GroupService}   private groupService	  Service use to manipulate group data 
 	 * @param {NavController}  public  navCtrl        Nav controller for routing 
 	 * @param {NavParams}      public  navParams      Nav params for data bindings in routing
 	 */
-	constructor(private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
+	constructor(private logService: LogService,private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
 	/**
 	 * Angular onInit function 
@@ -71,6 +73,8 @@ export class ConnectselectPage
 		let connect = this.userService.get(this.userMail).then((response) => 
 		{
 			console.log('Connection', response);
+			this.logService.userLog = response; 
+			console.log(this.logService.userLog); 
 			this.navCtrl.push(HomePage, 
 			{
 				userParams: this.userMail

@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { GroupService } from '../../services/group.service';
-import { UserService } from '../../services/user.service';
-import { LogService } from '../../services/log.service';
+// import { GroupService } from '../../services/group.service';
+// import { UserService } from '../../services/user.service';
+// import { LogService } from '../../services/log.service';
 import { PouchDBService } from '../../services/pouchdb.service'
 
 // Import pages 
@@ -19,9 +19,8 @@ import { Notiflist } from '../notificationlist/notiflist';
 export class HomePage {
 	// public groups;
 	// public users; 
-  	constructor(private pouchdbService: PouchDBService ,public navCtrl: NavController, public navParams: NavParams, storage: Storage) 
+  	constructor(public navCtrl: NavController, public navParams: NavParams, storage: Storage) 
   	{
-
 
 	}
 
@@ -29,7 +28,7 @@ export class HomePage {
 	{
 		// let userData = this.navParams.get('userParams').split(',');
 		// this.logService.setData(userData);
-		this.pouchdbService.sync();
+		// this.pouchdbService.sync();
 	}
 
 	/**
