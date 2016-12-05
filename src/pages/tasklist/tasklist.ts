@@ -22,12 +22,7 @@ export class Tasklist {
 
   ngOnInit()
   {
-      this.taskService.getTasks()
-      .subscribe(
-        items => this.items = items,
-        err => console.log(err),
-        () => {}
-      );
+      
   }
 
 
