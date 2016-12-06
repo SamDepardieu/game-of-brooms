@@ -30,8 +30,8 @@ export class HomePage implements OnInit {
 
 	ngOnInit()
 	{
-		let userData = this.navParams.get('userParams').split(',');
-		this.logService.setData(userData);
+		// let userData = this.navParams.get('userParams').split(',');
+		// this.logService.setData(userData);
 	}
 
 	/**
@@ -52,44 +52,44 @@ export class HomePage implements OnInit {
 
 	public getGroups(): void
 	{
-		this.groupService.getGroups()
-			.subscribe(
-				groups => this.groups = groups,
-				err => console.log(err),
-				() => console.log(this.groups)
-			);
+		// this.groupService.getGroups()
+		// 	.subscribe(
+		// 		groups => this.groups = groups,
+		// 		err => console.log(err),
+		// 		() => console.log(this.groups)
+		// 	);
 	}
 
 	public addGroup(name: string): void
 	{
-		let data = { "name": name };
-		this.groupService.addGroup(data)
-			.subscribe(
-				groups => this.groups = groups,
-				err => console.log(err),
-				() => console.log('Group added')
-			);
+		// let data = { "name": name };
+		// this.groupService.addGroup(data)
+		// 	.subscribe(
+		// 		groups => this.groups = groups,
+		// 		err => console.log(err),
+		// 		() => console.log('Group added')
+		// 	);
 	}
 
 	public getUsers(): void
 	{
-		this.userService.getUsers()
-			.subscribe(
-				users => this.users = users,
-				err => console.log(err),
-				() => console.log(this.users)
-			);
+		// this.userService.getUsers()
+		// 	.subscribe(
+		// 		users => this.users = users,
+		// 		err => console.log(err),
+		// 		() => console.log(this.users)
+		// 	);
 	}
 
 
 	public addUser(name: string, groupId: number, isAdmin: number): void
 	{
-		let data = {"group_id": ""+groupId+"", "name":""+name+"", "points": 0, "is_admin":""+isAdmin+""};
-		this.userService.addUser(data)
-			.subscribe(
-				users => this.users = users,
-				err => console.error(err),
-				() => console.log('User added')
-			);
+		// let data = {"group_id": ""+groupId+"", "name":""+name+"", "points": 0, "is_admin":""+isAdmin+""};
+		// this.userService.addUser(data)
+		// 	.subscribe(
+		// 		users => this.users = users,
+		// 		err => console.error(err),
+		// 		() => console.log('User added')
+		// 	);
 	}
 }

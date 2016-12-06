@@ -6,40 +6,12 @@
 	</ion-navbar>
 </ion-header>
 <ion-content padding>
-	<button ion-button icon-left color="light" (click)="goToTaskList()">
-<ion-icon name="md-checkbox-outline"></ion-icon>
-Tasks List
-</button>
-	<button ion-button icon-left color="dark" (click)="goToNotifList()">
-<ion-icon name="md-notifications"></ion-icon>
-Notifications List
-</button>
-	<br>
-
-	<ion-list>
-		<ion-item>
-			<ion-label>Group Name</ion-label>
-			<ion-input [(ngModel)]="groupName" type="text" value=""></ion-input>
-			<button item-right ion-button (click)="addGroup(groupName)">Add a group</button>
-		</ion-item>
-		<ion-item>
-			<button ion-button (click)="getGroups()">Get groups</button>
-		</ion-item>
-		<ion-item>
-			<ion-label>User Name</ion-label>
-			<ion-input [(ngModel)]="userName" type="text" value=""></ion-input>
-			<button item-right ion-button (click)="addUser(userName, groupId, isAdmin)">Add a user</button>
-		</ion-item>
-		<ion-item>
-			<ion-label>Group id</ion-label>
-			<ion-input [(ngModel)]="groupId" type="text" value=""></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label>Is Admin ? (0 or 1)</ion-label>
-			<ion-input [(ngModel)]="isAdmin" type="text" value=""></ion-input>
-		</ion-item>
-		<ion-item>
-			<button ion-button (click)="getUsers()">Get users</button>
-		</ion-item>
-	</ion-list>
+  <button ion-button icon-left color="light" (click)="goToTaskList()">
+  <ion-icon name="md-checkbox-outline"></ion-icon>
+  	Tasks List
+  </button>
+  <button ion-button icon-left color="dark" (click)="goToNotifList()">
+  <ion-icon name="md-notifications"></ion-icon>
+  	Notifications List
+  </button>
 </ion-content>

@@ -16,36 +16,38 @@ import { TaskService } from '../services/task.service';
 import { UserService } from '../services/user.service';
 import { GroupService } from '../services/group.service';
 import { LogService } from '../services/log.service';
+import { PouchDBService } from '../services/pouchdb.service';
 
 @NgModule({
-    declarations: [
-        MyApp,
-        HomePage,
-        Tasklist,
-        Notiflist,
-        Taskadd,
-        Taskdetail,
-        ConnectselectPage
-    ],
-    imports: [
-        IonicModule.forRoot(MyApp, [LogService])
-    ],
-    bootstrap: [IonicApp],
-    entryComponents: [
-        MyApp,
-        HomePage,
-        Tasklist,
-        Notiflist,
-        Taskadd,
-        Taskdetail,
-        ConnectselectPage
-    ],
-    providers: [
-        Storage,
-        TaskService,
-        UserService,
-        GroupService,
-        LogService
-    ]
+  declarations: [
+    MyApp,
+    HomePage,
+    Tasklist,
+    Notiflist,
+    Taskadd,
+    Taskdetail,
+    ConnectselectPage
+  ],
+  imports: [
+    IonicModule.forRoot(MyApp, [LogService])
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    HomePage,
+    Tasklist,
+    Notiflist,
+    Taskadd,
+    Taskdetail,
+    ConnectselectPage
+  ],
+  providers: [
+    Storage,
+    TaskService,
+    UserService,
+    GroupService,
+    LogService,
+    PouchDBService
+  ]
 })
 export class AppModule {}

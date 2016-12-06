@@ -9,22 +9,20 @@ import { TaskService } from '../../services/task.service';
     selector: 'page-tasklist',
     templateUrl: 'tasklist.html'
 })
+
 export class Tasklist implements OnInit {
+
     public items;
     public taskArray;
     public localDeadline;
 
-    constructor(private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams)
-    { }
+    constructor(private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
+
+    }
 
     ngOnInit()
     {
-        this.taskService.getTasks()
-            .subscribe(
-                items => this.items = items,
-                err => console.log(err),
-                () => {}
-            );
+
     }
 
     /**
@@ -32,7 +30,7 @@ export class Tasklist implements OnInit {
     */
     public goToTaskAdd(): void
     {
-        this.navCtrl.push(Taskadd);
+    	this.navCtrl.push(Taskadd);
     }
 
     /**
@@ -41,10 +39,9 @@ export class Tasklist implements OnInit {
     */
     public clickOnItem(item): void
     {
-        this.navCtrl.push(Taskdetail,
-            {
-                data: item
-            }
-        );
+    	this.navCtrl.push(Taskdetail,
+    	{
+    		data: item
+    	});
     }
 }
