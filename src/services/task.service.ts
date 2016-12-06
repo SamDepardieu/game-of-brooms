@@ -83,23 +83,3 @@ export class TaskService
 		});
 	}
 }
-
-// task
-// {
-//     "_id":"text hash autogen", // on a un truc pertinant ? le nomgroupe + timestamp mili ?
-//     "type":"task",
-//     "name":"text",
-//     "description":"text",
-//     "state":"text list(todo,doing,redo,done)", // etat de la tache
-//     "created":1234, // int / timestamp
-//     "updated":1234, // int / timestamp, last modif
-//     "deadline":1234, // int / timestamp
-//     "points":1234, // int / value of task
-//     // @TODO userId create &co
-
-//     "group":"groupe name _id",
-//     "owner":"address mail _id",
-//     "maker":"address mail _id",
-//     "checker":"address mail _id", // on fait un array là ?
-
-// }
