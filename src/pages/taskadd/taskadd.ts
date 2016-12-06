@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { TaskService } from '../../services/task.service';
+import { LogService } from '../../services/log.service'; 
 
 @Component({
   selector: 'page-taskadd',
@@ -15,7 +16,7 @@ export class Taskadd {
 	public taskPoints: number; 
 	public taskDeadline;
 
-	constructor(private taskService: TaskService, public navCtrl: NavController) {
+	constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController) {
 
 	}
 
@@ -30,13 +31,15 @@ export class Taskadd {
 			state: 'todo',
 			created: Date.now(),
 			updated: Date.now(),
-			deadline: this.taskDeadline,
-			points: this.taskPoints
+			deadline: Date.parse(this.taskDeadline),
+			points: this.taskPoints,
+			group: 'groupid',
+			owner: this.logService.userLog._id,
+			maker: '',
+			checker: []
 		};
 
-		console.log(this.taskDeadline);
-		console.log(Date.parse(this.taskDeadline));
-
+		console.log(this.logService.userLog._id);
 		// this.taskService.add(obj).then((response) =>
 		// {
 		// 	console.log('Task added', response);
