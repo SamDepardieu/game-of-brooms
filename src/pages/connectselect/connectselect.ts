@@ -136,4 +136,5 @@ export class ConnectselectPage
 			console.error(error); 
 		});
 	}
+
 }

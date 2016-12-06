@@ -48,6 +48,11 @@ export class Taskadd {
 		// 	console.error(error);
 		// });
 	}
+
+	public getAll()
+	{
+		this.taskService.getAll()
+	}
 }
 
 // task

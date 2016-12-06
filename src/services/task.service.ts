@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 // Services import 
 import { PouchDBService } from './pouchdb.service'; 
 
+// Declare emit for map reduce 
+declare var emit: any;
+
 @Injectable()
 /**
  * The TaskService class / service 
@@ -26,11 +29,31 @@ export class TaskService
 		this._db = this.pouchdbService.db; 
 	}
 
-
+	/**
+	 * Get all the tasks for the page 
+	 * @return {any} [description]
+	 */
 	public getAll(): any 
 	{
+		function mapFunction(doc)
+		{
+			emit(doc.type);
+		}
 
+		this._db.query(mapFunction, 
+		{
+			key: 'task',
+			include_docs: true
+		}).then((result) =>
+		{
+			console.log(result);
+		}).catch((err) =>
+		{
+			console.error(err);
+		});
 	}
+
+
 
 	public validate(): any 
 	{}

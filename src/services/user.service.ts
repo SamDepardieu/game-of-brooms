@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 // Services Import  
 import { PouchDBService } from './pouchdb.service'; 
 
+// Declare var emit for map reduce 
+declare var emit: any;
+
 @Injectable()
 /**
  * The UserService class / service 
