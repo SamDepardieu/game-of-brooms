@@ -107,22 +107,9 @@ export class ConnectselectPage implements OnInit
 			console.error(error);
 		});
 	}
->>>>>>> 4c0bdae7d6bcfd3dd7ba56b64a24f2327671f338
 
 	public createNewGroup(): void
 	{
-<<<<<<< HEAD
-		this.userService.getUsers()
-			.subscribe(
-				users => this.users = users,
-				err => console.log(err),
-				() =>
-				{
-					console.log(this.users);
-					this.userSelectors = this.users.member.records;
-				}
-			);
-=======
 		let newGroup =
 		{
 			_id: this.groupName,
@@ -145,6 +132,5 @@ export class ConnectselectPage implements OnInit
 		{
 			console.error(error);
 		});
->>>>>>> 4c0bdae7d6bcfd3dd7ba56b64a24f2327671f338
 	}
 }
