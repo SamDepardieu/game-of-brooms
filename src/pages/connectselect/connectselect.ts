@@ -45,6 +45,9 @@ export class ConnectselectPage
 	 */
 	public groupName: string;
 
+	public groupList; 
+	public groupListChoice;
+
 	/**
 	 * The ConnectselectPage constructor 
 	 * @param {LogService}	   private lgoService     Service use to call LogService methods
@@ -121,11 +124,7 @@ export class ConnectselectPage
 			created: Date.now(),
 			updated: Date.now(),
 			adminIp: '',
-			users: 
-			[
-				'ameliapcarpenter@dayrep.com',
-				'shandrawpeeples@rhyta.com'
-			]
+			users: []
 		};
 
 		this.groupService.add(newGroup).then((response) =>

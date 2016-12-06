@@ -53,8 +53,6 @@ export class TaskService
 		});
 	}
 
-
-
 	public validate(): any 
 	{}
 

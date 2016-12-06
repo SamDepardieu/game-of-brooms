@@ -20,12 +20,24 @@ export class Taskadd {
 
 	}
 
+
+	private generateId(): string 
+	{
+		function s4()
+		{
+			return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
+		}
+		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+	}
+
 	public add():void 
 	{
 		let obj = 
 		{
-			_id: 'dde',
-			type: 'task', 
+			_id: this.generateId(),
+			type: 'user', 
 			name: this.taskName,
 			description: this.taskDescription,
 			state: 'todo',
@@ -39,14 +51,14 @@ export class Taskadd {
 			checker: []
 		};
 
-		console.log(this.logService.userLog._id);
-		// this.taskService.add(obj).then((response) =>
-		// {
-		// 	console.log('Task added', response);
-		// }).catch((error) =>
-		// {
-		// 	console.error(error);
-		// });
+		console.log(obj);
+		this.taskService.add(obj).then((response) =>
+		{
+			console.log('Task added', response);
+		}).catch((error) =>
+		{
+			console.error(error);
+		});
 	}
 
 	public getAll()
@@ -54,23 +66,3 @@ export class Taskadd {
 		this.taskService.getAll()
 	}
 }
-
-// task
-// {
-//     "_id":"text hash autogen", // on a un truc pertinant ? le nomgroupe + timestamp mili ?
-//     "type":"task",
-//     "name":"text",
-//     "description":"text",
-//     "state":"text list(todo,doing,redo,done)", // etat de la tache
-//     "created":1234, // int / timestamp
-//     "updated":1234, // int / timestamp, last modif
-//     "deadline":1234, // int / timestamp
-//     "points":1234, // int / value of task
-//     // @TODO userId create &co
-
-//     "group":"groupe name _id",
-//     "owner":"address mail _id",
-//     "maker":"address mail _id",
-//     "checker":"address mail _id", // on fait un array là ?
-
-// }

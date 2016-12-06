@@ -58,7 +58,7 @@ export class GroupService
 
 		this._db.query(mapFunction, 
 		{
-			key: 'task',
+			key: 'group',
 			include_docs: true
 		}).then((result) =>
 		{
