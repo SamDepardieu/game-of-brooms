@@ -37,7 +37,7 @@ export class Taskadd {
 		let obj = 
 		{
 			_id: this.generateId(),
-			type: 'user', 
+			type: 'task', 
 			name: this.taskName,
 			description: this.taskDescription,
 			state: 'todo',
@@ -45,7 +45,7 @@ export class Taskadd {
 			updated: Date.now(),
 			deadline: Date.parse(this.taskDeadline),
 			points: this.taskPoints,
-			group: 'groupid',
+			group: this.logService.userLog.groupid,
 			owner: this.logService.userLog._id,
 			maker: '',
 			checker: []

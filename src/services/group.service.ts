@@ -56,16 +56,16 @@ export class GroupService
 			emit(doc.type);
 		}
 
-		this._db.query(mapFunction, 
+		return this._db.query(mapFunction, 
 		{
 			key: 'group',
 			include_docs: true
 		}).then((result) =>
 		{
-			console.log(result);
+			return result;
 		}).catch((err) =>
 		{
-			console.error(err);
+			throw err;
 		});
 	}
 

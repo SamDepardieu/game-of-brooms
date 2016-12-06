@@ -66,6 +66,15 @@ export class ConnectselectPage
 	{
 		// Launch the sync for the remote and local dbs
 		this.pouchdbService.sync();
+		// this.groupService.getAll(); 
+		this.groupService.getAll().then((response) =>
+		{
+			console.log(response);
+			this.groupList = response.rows;
+		}).catch((error) =>
+		{
+			console.error(error);
+		});
 	}
 
 	/**
@@ -102,7 +111,8 @@ export class ConnectselectPage
 			created: Date.now(),
 			updated: Date.now(),
 			points: 0, 
-			isAdmin: false
+			isAdmin: false,
+			groupid: this.groupListChoice
 		};
 
 		this.userService.add(newUser).then((response) => 
