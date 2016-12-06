@@ -35,12 +35,12 @@ export class TaskService
 	 */
 	public getAll(): any 
 	{
-		function mapFunction(doc)
+		function map(doc)
 		{
 			emit(doc.type);
 		}
 
-		this._db.query(mapFunction, 
+		this._db.query(map, 
 		{
 			key: 'task',
 			include_docs: true
@@ -51,6 +51,29 @@ export class TaskService
 		{
 			console.error(err);
 		});
+	}
+
+	public getByGroup(groupName: string)
+	{
+		function map(doc)
+		{
+			if(doc.type == 'task')
+			{
+				emit(doc.group);
+			}
+		}
+
+		return this._db.query(map, 
+		{
+			key: groupName,
+			include_docs: true
+		}).then((result) =>
+		{
+			return result;
+		}).catch((error) =>
+		{
+			throw error; 
+		})
 	}
 
 	public validate(): any 

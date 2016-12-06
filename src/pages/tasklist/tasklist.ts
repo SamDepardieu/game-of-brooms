@@ -13,17 +13,22 @@ import { LogService } from '../../services/log.service';
 export class Tasklist {
 
 
-	public items; 
   public taskArray; 
-  public localDeadline;
-
   constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
 
    }
 
   ngOnInit()
   {
-      
+    console.log(this.logService.userLog.groupid);
+      this.taskService.getByGroup(this.logService.userLog.groupid).then((response) =>
+      {
+        this.taskArray = response.rows;
+        console.log(this.taskArray);
+      }).catch((error) =>
+      {
+        console.error(error); 
+      })
   }
 
 

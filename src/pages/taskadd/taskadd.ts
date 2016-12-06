@@ -21,22 +21,22 @@ export class Taskadd {
 	}
 
 
-	private generateId(): string 
-	{
-		function s4()
-		{
-			return Math.floor((1 + Math.random()) * 0x10000)
-			.toString(16)
-			.substring(1);
-		}
-		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-	}
+	// private generateId(): string 
+	// {
+	// 	function s4()
+	// 	{
+	// 		return Math.floor((1 + Math.random()) * 0x10000)
+	// 		.toString(16)
+	// 		.substring(1);
+	// 	}
+	// 	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+	// }
 
 	public add():void 
 	{
 		let obj = 
 		{
-			_id: this.generateId(),
+			_id: this.logService.userLog.groupid+Date.now(),
 			type: 'task', 
 			name: this.taskName,
 			description: this.taskDescription,
