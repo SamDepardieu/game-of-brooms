@@ -124,6 +124,9 @@ export class ConnectselectPage
 		});
 	}
 
+	/**
+	 * Create a new group function 
+	 */
 	public createNewGroup(): void
 	{
 		let newGroup = 

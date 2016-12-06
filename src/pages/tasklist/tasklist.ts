@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Taskadd } from '../taskadd/taskadd';
 import { Taskdetail } from '../taskdetail/taskdetail';
 import { TaskService } from '../../services/task.service';
+import { LogService } from '../../services/log.service'; 
 
 @Component({
   selector: 'page-tasklist',
@@ -16,7 +17,7 @@ export class Tasklist {
   public taskArray; 
   public localDeadline;
 
-  constructor(private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
 
    }
 
