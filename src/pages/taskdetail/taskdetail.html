@@ -26,17 +26,21 @@
 	</ion-item>
 </ion-list>
 
-<button icon-left ion-button color="dark" >
+<button *ngIf="isValidateButton" icon-left ion-button color="dark" >
   <ion-icon name="md-add"></ion-icon>
   Validate task
   </button>
-  <button icon-left ion-button color="dark" >
+  <button *ngIf="isUpdateButon" icon-left ion-button color="dark" >
   <ion-icon name="md-add"></ion-icon>
   Update task
   </button>
-  <button icon-left ion-button color="dark" >
+  <button *ngIf="isReservateButton" icon-left ion-button color="dark" >
   <ion-icon name="md-add"></ion-icon>
   Reservate task
+  </button>
+  <button *ngIf="isDoneButton" icon-left ion-button color="dark" >
+  <ion-icon name="md-add"></ion-icon>
+  Task done
   </button>
 
 </ion-content>
