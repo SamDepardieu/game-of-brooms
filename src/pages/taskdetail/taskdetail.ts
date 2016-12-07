@@ -176,10 +176,10 @@ export class Taskdetail implements OnInit{
 			console.error(error); 
 		});
 
-		this.addPointsToMaker(this.taskInfo.points);
+		this._addPointsToMaker(this.taskInfo.points);
 	}
 
-	public addPointsToMaker(points: number)
+	private _addPointsToMaker(points: number)
 	{
 		this.userService.get(this.logService.userLog._id).then((doc) =>
 		{
