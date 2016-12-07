@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -6,10 +6,19 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-taskdetail',
   templateUrl: 'taskdetail.html'
 })
-export class Taskdetail {
+export class Taskdetail implements OnInit{
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(navParams.data);
-  }
+	public taskInfo; 
+
+	constructor(public navCtrl: NavController, public navParams: NavParams) {
+	this.taskInfo = navParams.data.data.doc;
+	this.taskInfo.deadline = new Date(this.taskInfo.deadline).toISOString();
+	console.log('info', navParams.data.data.doc);
+	}
+
+	ngOnInit()
+	{  
+
+	}
 
 }
