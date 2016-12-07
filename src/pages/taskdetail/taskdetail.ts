@@ -156,6 +156,16 @@ export class Taskdetail implements OnInit{
 		});
 	}
 
+	public delete()
+	{
+		this.taskService.remove(this.taskInfo).then(() =>
+		{
+			console.log('Task delete');
+		}).catch((error) =>
+		{
+			console.error(error);
+		})
+	}
 	public validate()
 	{
 		// change updated 

@@ -34,6 +34,10 @@
   <ion-icon name="md-add"></ion-icon>
   Update task
   </button>
+	<button *ngIf="isUpdateButon" (click)="delete()" icon-left ion-button color="dark" >
+  <ion-icon name="md-add"></ion-icon>
+  Delete task
+  </button>
   <button *ngIf="isReservateButton" (click)="reservate()" icon-left ion-button color="dark" >
   <ion-icon name="md-add"></ion-icon>
   Reservate task
