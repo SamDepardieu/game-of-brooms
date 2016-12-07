@@ -1,5 +1,5 @@
 // Angular Import 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 // Pages Import 
@@ -19,7 +19,7 @@ import { LogService } from '../../services/log.service';
  * The ConnectselectPage class / component 
  * @type {ConnectselectPage}
  */
-export class ConnectselectPage 
+export class ConnectselectPage implements OnInit
 {
 	/**
 	 * The login user mail 
@@ -45,12 +45,21 @@ export class ConnectselectPage
 	 */
 	public groupName: string;
 
+	/**
+	 * The list of groups 
+	 * @type {Array<string>}
+	 */
 	public groupList; 
+
+	/**
+	 * The user choice of a group 
+	 * @type {string}
+	 */
 	public groupListChoice;
 
 	/**
 	 * The ConnectselectPage constructor 
-	 * @param {LogService}	   private lgoService     Service use to call LogService methods
+	 * @param {LogService}	   private logService     Service use to call LogService methods
 	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods
 	 * @param {UserService}    private userService    Service use to manipulate user data 
 	 * @param {GroupService}   private groupService	  Service use to manipulate group data 

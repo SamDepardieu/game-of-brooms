@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 import { Taskadd } from '../taskadd/taskadd';
@@ -10,7 +10,7 @@ import { LogService } from '../../services/log.service';
   selector: 'page-tasklist',
   templateUrl: 'tasklist.html'
 })
-export class Tasklist {
+export class Tasklist implements OnInit{
 
 
   public taskArray; 

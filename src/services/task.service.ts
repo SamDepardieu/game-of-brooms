@@ -35,11 +35,13 @@ export class TaskService
 	 */
 	public getAll(): any 
 	{
+		// The map function use to filter results 
 		function map(doc)
 		{
 			emit(doc.type);
 		}
 
+		// Query the base with map 
 		this._db.query(map, 
 		{
 			key: 'task',
@@ -53,8 +55,13 @@ export class TaskService
 		});
 	}
 
+	/**
+	 * Get all the tasks from a group function 
+	 * @param {string} groupName The name of the current group
+	 */
 	public getByGroup(groupName: string)
 	{
+		// Map function 
 		function map(doc)
 		{
 			if(doc.type == 'task')
@@ -63,6 +70,7 @@ export class TaskService
 			}
 		}
 
+		// Return of the result 
 		return this._db.query(map, 
 		{
 			key: groupName,

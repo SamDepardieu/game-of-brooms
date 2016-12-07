@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-
+// Angular Import 
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
+// Services Import 
 import { PouchDBService } from '../../services/pouchdb.service'
 
 // Import pages 
@@ -13,13 +13,25 @@ import { Notiflist } from '../notificationlist/notiflist';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+/**
+ * The HomePage class / component 
+ * @type {HomePage}
+ */
+export class HomePage implements OnInit {
 
-  	constructor(public navCtrl: NavController, public navParams: NavParams, storage: Storage) 
+	/**
+	 * The HomePage Constructor 
+	 * @param {NavController} public  navCtrl       Nav controller for routing pages
+	 * @param {NavParams}     public  navParams     Nav params for data bindings 
+	 */
+  	constructor(public navCtrl: NavController, public navParams: NavParams) 
   	{
 
 	}
 
+	/**
+	 * Angular OnInit function 
+	 */
 	ngOnInit()
 	{
 
