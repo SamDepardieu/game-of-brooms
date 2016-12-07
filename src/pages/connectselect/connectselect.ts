@@ -157,5 +157,4 @@ export class ConnectselectPage implements OnInit
 			console.error(error); 
 		});
 	}
-
 }

@@ -5,6 +5,8 @@ import { NavController } from 'ionic-angular';
 import { TaskService } from '../../services/task.service';
 import { LogService } from '../../services/log.service'; 
 
+import { Tasklist } from '../tasklist/tasklist';
+
 @Component({
   selector: 'page-taskadd',
   templateUrl: 'taskadd.html'
@@ -43,6 +45,7 @@ export class Taskadd {
 		this.taskService.add(obj).then((response) =>
 		{
 			console.log('Task added', response);
+			this.navCtrl.push(Tasklist);
 		}).catch((error) =>
 		{
 			console.error(error);
