@@ -10,7 +10,8 @@ import { ConnectselectPage }    from '../pages/connectselect/connectselect'
     template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-    rootPage = ConnectselectPage;
+  // rootPage = HomePage;
+  rootPage = ConnectselectPage;
 
     constructor(platform: Platform) {
         platform.ready().then(() => {

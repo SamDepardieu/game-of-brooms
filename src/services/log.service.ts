@@ -1,21 +1,24 @@
-import { Injectable } from '@angular/core';
+// Angular import
+import { Injectable } from '@angular/core'
 
 import { Member } from '../classes/member';
 
 @Injectable()
 export class LogService {
 
-	private member: Member;
+	private _userLog;
 
 	constructor() {
 
 	}
-
-	public setData(data): void {
-		this.member = new Member(parseInt(data[0]), parseInt(data[1]), data[2], parseInt(data[3]), parseInt(data[4]));
+	public get userLog()
+	{
+		return this._userLog;
 	}
 
-	public getData(): Member {
-		return this.member;
+	public set userLog(newLog)
+	{
+		this._userLog = newLog;
 	}
+
 }

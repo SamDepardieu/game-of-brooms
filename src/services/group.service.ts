@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 // Import PouchDB
 import { PouchDBService } from './pouchdb.service';
 
+// Declare emit for map reduce
+declare var emit: any;
+
 @Injectable()
 /**
  * The GroupService class / service
@@ -43,7 +46,31 @@ export class GroupService
 	}
 
 	/**
-	 * Add a group function
+	 * Get all groups
+	 * @return {any} [description]
+	 */
+	public getAll(): any
+	{
+		function mapFunction(doc)
+		{
+			emit(doc.type);
+		}
+
+		return this._db.query(mapFunction,
+		{
+			key: 'group',
+			include_docs: true
+		}).then((result) =>
+		{
+			return result;
+		}).catch((err) =>
+		{
+			throw err;
+		});
+	}
+
+	/**
+	 * Add a group function 
 	 * @param  {Object} obj Object of a new group
 	 * @return {any}        Object with the docs
 	 */

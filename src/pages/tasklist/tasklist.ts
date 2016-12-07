@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Taskadd } from '../taskadd/taskadd';
 import { Taskdetail } from '../taskdetail/taskdetail';
 import { TaskService } from '../../services/task.service';
+import { LogService } from '../../services/log.service';
 
 @Component({
     selector: 'page-tasklist',
@@ -12,17 +13,21 @@ import { TaskService } from '../../services/task.service';
 
 export class Tasklist implements OnInit {
 
-    public items;
     public taskArray;
-    public localDeadline;
-
-    constructor(private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
-
+    constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
     }
 
     ngOnInit()
     {
-
+        console.log(this.logService.userLog.groupid);
+        this.taskService.getByGroup(this.logService.userLog.groupid).then((response) =>
+            {
+            this.taskArray = response.rows;
+            console.log(this.taskArray);
+            }).catch((error) =>
+            {
+            console.error(error);
+            })
     }
 
     /**

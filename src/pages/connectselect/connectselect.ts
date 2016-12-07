@@ -9,6 +9,7 @@ import { HomePage } from '../home/home';
 import { UserService } from '../../services/user.service';
 import { GroupService } from '../../services/group.service';
 import { PouchDBService } from '../../services/pouchdb.service';
+import { LogService } from '../../services/log.service';
 
 @Component({
 	selector: 'page-connectselect',
@@ -46,14 +47,27 @@ export class ConnectselectPage implements OnInit
 	public groupName: string;
 
 	/**
+	 * The list of groups
+	 * @type {Array<string>}
+	 */
+	public groupList;
+
+	/**
+	 * The user choice of a group
+	 * @type {string}
+	 */
+	public groupListChoice;
+
+	/**
 	 * The ConnectselectPage constructor
+	 * @param {LogService}	   private logService     Service use to call LogService methods
 	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods
 	 * @param {UserService}    private userService    Service use to manipulate user data
 	 * @param {GroupService}   private groupService	  Service use to manipulate group data
 	 * @param {NavController}  public  navCtrl        Nav controller for routing
 	 * @param {NavParams}      public  navParams      Nav params for data bindings in routing
 	 */
-	constructor(private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
+	constructor(private logService: LogService,private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
 	/**
 	 * Angular onInit function
@@ -62,6 +76,15 @@ export class ConnectselectPage implements OnInit
 	{
 		// Launch the sync for the remote and local dbs
 		this.pouchdbService.sync();
+		// this.groupService.getAll();
+		this.groupService.getAll().then((response) =>
+		{
+			console.log(response);
+			this.groupList = response.rows;
+		}).catch((error) =>
+		{
+			console.error(error);
+		});
 	}
 
 	/**
@@ -72,6 +95,8 @@ export class ConnectselectPage implements OnInit
 		let connect = this.userService.get(this.userMail).then((response) =>
 		{
 			console.log('Connection', response);
+			this.logService.userLog = response;
+			console.log(this.logService.userLog);
 			this.navCtrl.push(HomePage,
 			{
 				userParams: this.userMail
@@ -96,7 +121,8 @@ export class ConnectselectPage implements OnInit
 			created: Date.now(),
 			updated: Date.now(),
 			points: 0,
-			isAdmin: false
+			isAdmin: false,
+			groupid: this.groupListChoice
 		};
 
 		this.userService.add(newUser).then((response) =>
@@ -108,6 +134,9 @@ export class ConnectselectPage implements OnInit
 		});
 	}
 
+	/**
+	 * Create a new group function
+	 */
 	public createNewGroup(): void
 	{
 		let newGroup =
@@ -118,11 +147,7 @@ export class ConnectselectPage implements OnInit
 			created: Date.now(),
 			updated: Date.now(),
 			adminIp: '',
-			users:
-			[
-				'ameliapcarpenter@dayrep.com',
-				'shandrawpeeples@rhyta.com'
-			]
+			users: []
 		};
 
 		this.groupService.add(newGroup).then((response) =>
