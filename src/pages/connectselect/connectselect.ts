@@ -131,6 +131,21 @@ export class ConnectselectPage implements OnInit
 		{
 			console.error(error); 
 		});
+
+		this.groupService.get(this.groupListChoice).then((doc) =>
+		{
+			console.log(doc.users);
+			doc.users.push(newUser._id);
+			doc.updated = Date.now();
+			
+			return this.pouchdbService.db.put(doc);
+		}).then(() =>
+		{
+			console.log('Group updated'); 
+		}).catch((error) =>
+		{
+			console.error(error);
+		});
 	}
 
 	/**

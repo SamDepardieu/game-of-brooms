@@ -26,7 +26,7 @@ export class Taskadd {
 	{
 		let obj = 
 		{
-			_id: this.logService.userLog.groupid+Date.now(),
+			_id: this.logService.userLog.groupid+'-'+Date.now(),
 			type: 'task', 
 			name: this.taskName,
 			description: this.taskDescription,
