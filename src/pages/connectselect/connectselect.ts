@@ -75,7 +75,14 @@ export class ConnectselectPage implements OnInit
 	{
 		// Launch the sync for the remote and local dbs
 		this.pouchdbService.sync();
-		// this.groupService.getAll(); 
+		this.updateListGroups();
+	}
+
+	/**
+	 * Update the group list 
+	 */
+	public updateListGroups(): void
+	{
 		this.groupService.getAll().then((response) =>
 		{
 			console.log(response);
@@ -171,5 +178,7 @@ export class ConnectselectPage implements OnInit
 		{
 			console.error(error); 
 		});
+
+		this.updateListGroups();
 	}
 }
