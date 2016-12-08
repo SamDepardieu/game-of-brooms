@@ -5,6 +5,7 @@ import { LogService } from '../../services/log.service';
 import { PouchDBService } from '../../services/pouchdb.service';
 import { UserService } from '../../services/user.service'; 
 import { TaskService } from '../../services/task.service';
+import { Tasklist } from '../tasklist/tasklist';
 
 @Component({
   selector: 'page-taskdetail',
@@ -100,7 +101,13 @@ export class Taskdetail implements OnInit{
 		}
 	}
 
-	// partout mettre updated 
+	// Après appuie ya reload des infos et changement de page 
+
+	private _goToTaskList()
+	{
+		this.navCtrl.push(Tasklist);
+	}
+
 	public reservate()
 	{
 		this.taskService.get(this.taskInfo._id).then((doc) =>
@@ -112,6 +119,7 @@ export class Taskdetail implements OnInit{
 		}).then(() =>
 		{
 			console.log('Task reservate'); 
+			this._goToTaskList();
 		}).catch((error) =>
 		{
 			console.error(error); 
@@ -131,7 +139,8 @@ export class Taskdetail implements OnInit{
 			return this.pouchdbService.db.put(doc);
 		}).then(() =>
 		{
-			console.log('Task updated'); 
+			console.log('Task updated');
+			this._goToTaskList(); 
 		}).catch((error) =>
 		{
 			console.error(error); 
@@ -140,8 +149,6 @@ export class Taskdetail implements OnInit{
 
 	public done() // ask validate 
 	{
-		// change updated 
-		// state passe en ask validate 
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
@@ -149,7 +156,8 @@ export class Taskdetail implements OnInit{
 			return this.pouchdbService.db.put(doc);
 		}).then(() =>
 		{
-			console.log('Task done'); 
+			console.log('Task done');
+			this._goToTaskList(); 
 		}).catch((error) =>
 		{
 			console.error(error); 
@@ -161,6 +169,8 @@ export class Taskdetail implements OnInit{
 		this.taskService.remove(this.taskInfo).then(() =>
 		{
 			console.log('Task delete');
+			this._goToTaskList();
+
 		}).catch((error) =>
 		{
 			console.error(error);
@@ -168,36 +178,36 @@ export class Taskdetail implements OnInit{
 	}
 	public validate()
 	{
-		// change updated 
-		// passe en done state
-		// ajouter les points task au maker 
-		// ajoute le checker (array)
+		let maker;
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
 			doc.checker.push(this.logService.userLog._id);
 			doc.state = 'done'
+			maker = doc.maker;
 			return this.pouchdbService.db.put(doc);
 		}).then(() =>
 		{
 			console.log('Task validate'); 
+			
 		}).catch((error) =>
 		{
 			console.error(error); 
 		});
 
-		this._addPointsToMaker(this.taskInfo.points);
+		this._addPointsToMaker(this.taskInfo.points, maker);
 	}
 
-	private _addPointsToMaker(points: number)
+	private _addPointsToMaker(points: number, user: string)
 	{
-		this.userService.get(this.logService.userLog._id).then((doc) =>
+		this.userService.get(user).then((doc) =>
 		{
 			doc.points += points; 
 			return this.pouchdbService.db.put(doc); 
 		}).then(() =>
 		{
 			console.log('Points add to user');
+			this._goToTaskList();
 		}).catch((error) =>
 		{
 			console.error(error);
