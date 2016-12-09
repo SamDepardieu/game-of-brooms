@@ -1,30 +1,91 @@
+// Angular Import
 import { Component, OnInit } from '@angular/core';
-
 import { NavController, NavParams } from 'ionic-angular';
+
+// Import Services 
 import { LogService } from '../../services/log.service'; 
 import { PouchDBService } from '../../services/pouchdb.service';
 import { UserService } from '../../services/user.service'; 
 import { TaskService } from '../../services/task.service';
+
+// Import Pages 
 import { Tasklist } from '../tasklist/tasklist';
 
 @Component({
   selector: 'page-taskdetail',
   templateUrl: 'taskdetail.html'
 })
+/**
+ * The Taskdetail Class / Component
+ * @type{Taskdetail}
+ */
 export class Taskdetail implements OnInit{
 
+	/**
+	 * The complete task info 
+	 * @type {[type]}
+	 */
 	public taskInfo; 
-	public isOwner: boolean; 
-	public isReserved: boolean; 
-	public isMaker: boolean; 
 
+	/**
+	 * Is User Owner 
+	 * @type {boolean}
+	 */
+	public isOwner: boolean; 
+
+	/**
+	 * Is Task Reserved
+	 * @type {boolean}
+	 */
+	public isReserved: boolean; 
+
+	/**
+	 * Is User Maker 
+	 * @type {boolean}
+	 */
+	public isMaker: boolean;
+
+	/**
+	 * Is Validate Button visible 
+	 * @type {boolean}
+	 */
 	public isValidateButton: boolean;
+
+	/**
+	 * Is Update Button Visible 
+	 * @type {boolean}
+	 */
 	public isUpdateButton: boolean;
+
+	/**
+	 * Is Reservate Button Visible 
+	 * @type {boolean}
+	 */
 	public isReservateButton: boolean;
+
+	/**
+	 * Is Done Button Visible 
+	 * @type {boolean}
+	 */
 	public isDoneButton: boolean;
+
+	/**
+	 * Is Task Done 
+	 * @type {boolean}
+	 */
 	public isDone: boolean;
 
-	constructor(private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
+	/**
+	 * The task detail constructor 
+	 * @param {UserService}    private userService    The service use to manipulate user 
+	 * @param {PouchDBService} private pouchdbService The service use to call pouchdb 
+	 * @param {LogService}     private logService     The service use to have user logs
+	 * @param {TaskService}    private taskService    The service use to manipulate tasks 
+	 * @param {NavController}  public  navCtrl        The controller for routing 
+	 * @param {NavParams}      public  navParams      The params for data bindings 
+	 */
+	constructor(private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) 
+	{
 		this.taskInfo = navParams.data.data.doc;
 		this.taskInfo.deadline = new Date(this.taskInfo.deadline).toISOString();
 		this.isValidateButton = false; 
@@ -34,6 +95,9 @@ export class Taskdetail implements OnInit{
 		this.isDone = false;
 	}
 
+	/**
+	 * The private method for checking data 
+	 */
 	private _checkData(): void
 	{
 		if(this.taskInfo.owner === this.logService.userLog._id)
@@ -69,10 +133,12 @@ export class Taskdetail implements OnInit{
 		}
 	}
 
+	/**
+	 * Angular OnInit function 
+	 */
 	ngOnInit()
 	{  
 		this._checkData();
-		console.log(this.isOwner, this.isReserved, this.isMaker);
 		if(this.isDone)
 		{
 				this.isValidateButton = false; 
@@ -86,12 +152,10 @@ export class Taskdetail implements OnInit{
 			{			
 				if(this.isReserved)
 				{
-					// ya button validate
 					this.isValidateButton = true; 
 				}
 				else
 				{
-					// ya button edit 
 					this.isUpdateButton = true; 
 				}
 			}
@@ -102,35 +166,30 @@ export class Taskdetail implements OnInit{
 			{
 				if(this.isMaker)
 				{
-					// button ask validate 
 					this.isDoneButton = true; 
-				}
-				else
-				{
-					// y a nothing 
-					// this.isReservateButton = false;
-					// this.isDoneButton = false;
-					// this.isValidateButton = false; 
-					// this.isUpdateButton = false; 
 				}
 			}
 			else
 			{
-				// y a button reservate 
 				this.isReservateButton = true; 
 			}
 		}
 	}
 
-	// Après appuie ya reload des infos et changement de page 
-
-	private _goToTaskList()
+	/**
+	 * The private method to change page 
+	 */
+	private _goToTaskList(): void 
 	{
 		this.navCtrl.push(Tasklist);
 	}
 
-	public reservate()
+	/**
+	 * Reservate a task method 
+	 */
+	public reservate(): void
 	{
+		// Get the task and update it 
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
@@ -147,8 +206,12 @@ export class Taskdetail implements OnInit{
 		});
 	}
 
-	public update()
+	/**
+	 * Update a task method 
+	 */
+	public update(): void 
 	{
+		// Get the task and update it 
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
@@ -168,8 +231,12 @@ export class Taskdetail implements OnInit{
 		});
 	}
 
-	public done() // ask validate 
+	/**
+	 * Done a task method 
+	 */
+	public done(): void 
 	{
+		// Get the task and update it 
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
@@ -185,8 +252,12 @@ export class Taskdetail implements OnInit{
 		});
 	}
 
-	public delete()
+	/**
+	 * Delete a task method 
+	 */
+	public delete(): void 
 	{
+		// Remove the task 
 		this.taskService.remove(this.taskInfo).then(() =>
 		{
 			console.log('Task delete');
@@ -197,9 +268,15 @@ export class Taskdetail implements OnInit{
 			console.error(error);
 		})
 	}
-	public validate()
+
+	/**
+	 * Validate a task method 
+	 */
+	public validate(): void 
 	{
 		let maker;
+
+		// Get the task and update it 
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
@@ -217,12 +294,16 @@ export class Taskdetail implements OnInit{
 		{
 			console.error(error); 
 		});
-
-		// 
 	}
 
+	/**
+	 * Method to add points for the user maker 
+	 * @param {number} points The points to add
+	 * @param {string} user   The user to add points 
+	 */
 	private _addPointsToMaker(points: number, user: string)
 	{
+		// Get the user and add points, update it 
 		this.userService.get(user).then((doc) =>
 		{
 			doc.points += points; 
@@ -234,9 +315,8 @@ export class Taskdetail implements OnInit{
 		}).catch((error) =>
 		{
 			console.error(error);
-		})
+		});
 	}
-
 }
 
 
