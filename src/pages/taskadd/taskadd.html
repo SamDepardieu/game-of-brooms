@@ -1,31 +1,32 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Add a task page 
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>
+			Add a task page 
+		</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-  	<ion-item>
-  		<ion-label color="primary">Task name</ion-label>
-    	<ion-input [(ngModel)]="taskName" placeholder="task name"></ion-input>
-  	</ion-item><ion-item>
-  		<ion-label color="primary">Description</ion-label>
-    	<ion-input [(ngModel)]="taskDescription" placeholder="description"></ion-input>
-  	</ion-item>
-  	<ion-item>
-  		<ion-label color="primary">Points</ion-label>
-    	<ion-input [(ngModel)]="taskPoints" placeholder="10"></ion-input>
-  	</ion-item>
-  	<ion-item>
-		<ion-label color="primary">Deadline</ion-label>
-		<ion-datetime max="2020-10-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="taskDeadline"></ion-datetime>
-	</ion-item>
-  	<ion-item>
-    <button  ion-button color="secondary" (click)="add()">Add a task</button>
-    <button  ion-button color="secondary" (click)="getAll()">Get tasks</button>
-  </ion-item>
-  </ion-list>
+	<ion-list>
+		<ion-item>
+			<ion-label color="primary">Task name</ion-label>
+			<ion-input [(ngModel)]="taskName" placeholder="task name"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary">Description</ion-label>
+			<ion-input [(ngModel)]="taskDescription" placeholder="description"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary">Points</ion-label>
+			<ion-input [(ngModel)]="taskPoints" placeholder="10"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary">Deadline</ion-label>
+			<ion-datetime max="2020-10-31" displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="taskDeadline"></ion-datetime>
+		</ion-item>
+		<ion-item>
+			<button  ion-button color="secondary" (click)="add()">Add a task</button>
+			<button  ion-button color="secondary" (click)="getAll()">Get tasks</button>
+		</ion-item>
+	</ion-list>
 </ion-content>

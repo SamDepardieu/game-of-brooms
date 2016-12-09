@@ -49,7 +49,7 @@ export class ConnectselectPage implements OnInit
 	 * The list of groups 
 	 * @type {Array<string>}
 	 */
-	public groupList; 
+	public groupList: Array<string>; 
 
 	/**
 	 * The user choice of a group 
@@ -75,7 +75,15 @@ export class ConnectselectPage implements OnInit
 	{
 		// Launch the sync for the remote and local dbs
 		this.pouchdbService.sync();
-		// this.groupService.getAll(); 
+		this.updateListGroups();
+	}
+
+	/**
+	 * Update the group list 
+	 */
+	public updateListGroups(): void
+	{
+		// Call the db 
 		this.groupService.getAll().then((response) =>
 		{
 			console.log(response);
@@ -91,11 +99,10 @@ export class ConnectselectPage implements OnInit
 	 */
 	public connect(): void
 	{
-		let connect = this.userService.get(this.userMail).then((response) => 
+		// Check if the user already exists 
+		this.userService.get(this.userMail).then((response) => 
 		{
-			console.log('Connection', response);
 			this.logService.userLog = response; 
-			console.log(this.logService.userLog); 
 			this.navCtrl.push(HomePage, 
 			{
 				userParams: this.userMail
@@ -112,6 +119,7 @@ export class ConnectselectPage implements OnInit
 	 */
 	public signup(): void
 	{
+		// Create the user object 
 		let newUser = 
 		{ 
 			_id: this.newUserMail,
@@ -124,12 +132,27 @@ export class ConnectselectPage implements OnInit
 			groupid: this.groupListChoice
 		};
 
+		// Add the user 
 		this.userService.add(newUser).then((response) => 
 		{
 			console.log('User added', response);
 		}).catch((error) =>
 		{
 			console.error(error); 
+		});
+
+		// Update the group with the new user 
+		this.groupService.get(this.groupListChoice).then((doc) =>
+		{
+			doc.users.push(newUser._id);
+			doc.updated = Date.now();
+			return this.pouchdbService.db.put(doc);
+		}).then(() =>
+		{
+			console.log('Group updated'); 
+		}).catch((error) =>
+		{
+			console.error(error);
 		});
 	}
 
@@ -138,6 +161,7 @@ export class ConnectselectPage implements OnInit
 	 */
 	public createNewGroup(): void
 	{
+		// Create the group object 
 		let newGroup = 
 		{
 			_id: this.groupName,
@@ -149,6 +173,7 @@ export class ConnectselectPage implements OnInit
 			users: []
 		};
 
+		// Add the group 
 		this.groupService.add(newGroup).then((response) =>
 		{
 			console.log('Group added', response);
@@ -156,6 +181,8 @@ export class ConnectselectPage implements OnInit
 		{
 			console.error(error); 
 		});
-	}
 
+		// Update the group list 
+		this.updateListGroups();
+	}
 }
