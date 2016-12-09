@@ -1,46 +1,48 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Connection Page </ion-title>
-  </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>Connection Page </ion-title>
+	</ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-<h2>Login</h2>
-<ion-list>
-  <ion-item>
-    <ion-label color="primary">Mail Adress</ion-label>
-    <ion-input [(ngModel)]="userMail" placeholder="mail.adress@mail.com"></ion-input>
-  </ion-item>
-  <ion-item>
-    <button *ngIf="userMail" ion-button color="secondary" (click)="connect()">Connect</button>
-  </ion-item>
-</ion-list>
+	<h2>Login</h2>
+	<ion-list>
+		<ion-item>
+			<ion-label color="primary">Mail Adress</ion-label>
+			<ion-input [(ngModel)]="userMail" placeholder="mail.adress@mail.com"></ion-input>
+		</ion-item>
+		<ion-item>
+			<button *ngIf="userMail" ion-button color="secondary" (click)="connect()">Connect</button>
+		</ion-item>
+	</ion-list>
 
-<h2>Signup</h2>
-<ion-list>
-  <ion-item><ion-label color="primary">Mail Adress</ion-label>
-  <ion-input [(ngModel)]="newUserMail" placeholder="mail.adress@mail.com"></ion-input></ion-item>
-  <ion-item>
-    <ion-label color="primary">Name</ion-label>
-    <ion-input [(ngModel)]="newUserName" placeholder="User Name"></ion-input></ion-item>
-  <ion-item>
-    <ion-label color="primary">Group</ion-label>
-    <ion-select [(ngModel)]="groupListChoice">
-    <ion-option *ngFor="let item of groupList;">{{item.id}}</ion-option>
-    </ion-select>
-  </ion-item> 
-  <ion-item>
-    <button *ngIf="newUserMail && newUserName" ion-button color="secondary" (click)="signup()">Signup</button>
-  </ion-item>
-</ion-list>
-    
-    <h2>Add a group</h2>
-    <ion-list>
-      <ion-item><ion-label color="primary">Group Name</ion-label>
-    <ion-input [(ngModel)]="groupName" placeholder="Group Name"></ion-input></ion-item>
-    <ion-item><button *ngIf="groupName" ion-button color="secondary" (click)="createNewGroup()">Add a group</button></ion-item>
-    </ion-list>
+	<h2>Signup</h2>
+	<ion-list>
+		<ion-item>
+			<ion-label color="primary">Mail Adress</ion-label>
+			<ion-input [(ngModel)]="newUserMail" placeholder="mail.adress@mail.com"></ion-input></ion-item>
+		<ion-item>
+			<ion-label color="primary">Name</ion-label>
+			<ion-input [(ngModel)]="newUserName" placeholder="User Name"></ion-input></ion-item>
+		<ion-item>
+			<ion-label color="primary">Group</ion-label>
+			<ion-select [(ngModel)]="groupListChoice">
+				<ion-option *ngFor="let item of groupList;">{{item.id}}</ion-option>
+			</ion-select>
+		</ion-item> 
+		<ion-item>
+			<button *ngIf="newUserMail && newUserName" ion-button color="secondary" (click)="signup()">Signup</button>
+		</ion-item>
+	</ion-list>
+
+	<h2>Add a group</h2>
+	<ion-list>
+		<ion-item>
+			<ion-label color="primary">Group Name</ion-label>
+			<ion-input [(ngModel)]="groupName" placeholder="Group Name"></ion-input>
+		</ion-item>
+		<ion-item>
+			<button *ngIf="groupName" ion-button color="secondary" (click)="createNewGroup()">Add a group</button>
+		</ion-item>
+	</ion-list>
 </ion-content>
