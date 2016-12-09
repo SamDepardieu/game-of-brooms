@@ -1,25 +1,44 @@
-import { Injectable } from '@angular/core';
-import { Member } from '../classes/member';
+// Angular Import 
+import { Injectable } from '@angular/core'
 
 
 @Injectable()
+/**
+ * The LogService class / service 
+ * @type {[type]}
+ */
 export class LogService
 {
 
-	private member: Member; 
+	/**
+	 * The user log data 
+	 * @type {any}
+	 */
+	private _userLog; 
 
+	/**
+	 * The LogService constructor 
+	 */
 	constructor()
 	{
 
 	}
 
-	public setData(data): void 
+	/**
+	 * _userLog getter
+	 */
+	public get userLog() 
 	{
-		this.member = new Member(parseInt(data[0]), parseInt(data[1]), data[2], parseInt(data[3]), parseInt(data[4]));
+		return this._userLog; 
 	}
 
-	public getData(): Member
+	/**
+	 * _userLog setter 
+	 * @param {any} newLog The new user log 
+	 */
+	public set userLog(newLog)
 	{
-		return this.member; 
+		this._userLog = newLog; 
 	}
+
 }

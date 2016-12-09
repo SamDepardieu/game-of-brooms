@@ -1,5 +1,5 @@
 // Angular Import 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 // Pages Import 
@@ -9,6 +9,7 @@ import { HomePage } from '../home/home';
 import { UserService } from '../../services/user.service';
 import { GroupService } from '../../services/group.service'; 
 import { PouchDBService } from '../../services/pouchdb.service'; 
+import { LogService } from '../../services/log.service'; 
 
 @Component({
 	selector: 'page-connectselect',
@@ -18,7 +19,7 @@ import { PouchDBService } from '../../services/pouchdb.service';
  * The ConnectselectPage class / component 
  * @type {ConnectselectPage}
  */
-export class ConnectselectPage 
+export class ConnectselectPage implements OnInit
 {
 	/**
 	 * The login user mail 
@@ -45,14 +46,27 @@ export class ConnectselectPage
 	public groupName: string;
 
 	/**
+	 * The list of groups 
+	 * @type {Array<string>}
+	 */
+	public groupList: Array<string>; 
+
+	/**
+	 * The user choice of a group 
+	 * @type {string}
+	 */
+	public groupListChoice;
+
+	/**
 	 * The ConnectselectPage constructor 
+	 * @param {LogService}	   private logService     Service use to call LogService methods
 	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods
 	 * @param {UserService}    private userService    Service use to manipulate user data 
 	 * @param {GroupService}   private groupService	  Service use to manipulate group data 
 	 * @param {NavController}  public  navCtrl        Nav controller for routing 
 	 * @param {NavParams}      public  navParams      Nav params for data bindings in routing
 	 */
-	constructor(private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
+	constructor(private logService: LogService,private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
 	/**
 	 * Angular onInit function 
@@ -61,6 +75,23 @@ export class ConnectselectPage
 	{
 		// Launch the sync for the remote and local dbs
 		this.pouchdbService.sync();
+		this.updateListGroups();
+	}
+
+	/**
+	 * Update the group list 
+	 */
+	public updateListGroups(): void
+	{
+		// Call the db 
+		this.groupService.getAll().then((response) =>
+		{
+			console.log(response);
+			this.groupList = response.rows;
+		}).catch((error) =>
+		{
+			console.error(error);
+		});
 	}
 
 	/**
@@ -68,9 +99,10 @@ export class ConnectselectPage
 	 */
 	public connect(): void
 	{
-		let connect = this.userService.get(this.userMail).then((response) => 
+		// Check if the user already exists 
+		this.userService.get(this.userMail).then((response) => 
 		{
-			console.log('Connection', response);
+			this.logService.userLog = response; 
 			this.navCtrl.push(HomePage, 
 			{
 				userParams: this.userMail
@@ -87,6 +119,7 @@ export class ConnectselectPage
 	 */
 	public signup(): void
 	{
+		// Create the user object 
 		let newUser = 
 		{ 
 			_id: this.newUserMail,
@@ -95,9 +128,11 @@ export class ConnectselectPage
 			created: Date.now(),
 			updated: Date.now(),
 			points: 0, 
-			isAdmin: false
+			isAdmin: false,
+			groupid: this.groupListChoice
 		};
 
+		// Add the user 
 		this.userService.add(newUser).then((response) => 
 		{
 			console.log('User added', response);
@@ -105,10 +140,28 @@ export class ConnectselectPage
 		{
 			console.error(error); 
 		});
+
+		// Update the group with the new user 
+		this.groupService.get(this.groupListChoice).then((doc) =>
+		{
+			doc.users.push(newUser._id);
+			doc.updated = Date.now();
+			return this.pouchdbService.db.put(doc);
+		}).then(() =>
+		{
+			console.log('Group updated'); 
+		}).catch((error) =>
+		{
+			console.error(error);
+		});
 	}
 
+	/**
+	 * Create a new group function 
+	 */
 	public createNewGroup(): void
 	{
+		// Create the group object 
 		let newGroup = 
 		{
 			_id: this.groupName,
@@ -117,13 +170,10 @@ export class ConnectselectPage
 			created: Date.now(),
 			updated: Date.now(),
 			adminIp: '',
-			users: 
-			[
-				'ameliapcarpenter@dayrep.com',
-				'shandrawpeeples@rhyta.com'
-			]
+			users: []
 		};
 
+		// Add the group 
 		this.groupService.add(newGroup).then((response) =>
 		{
 			console.log('Group added', response);
@@ -131,5 +181,8 @@ export class ConnectselectPage
 		{
 			console.error(error); 
 		});
+
+		// Update the group list 
+		this.updateListGroups();
 	}
 }

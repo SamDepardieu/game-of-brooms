@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
-
+// Angular Import 
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
-import { GroupService } from '../../services/group.service';
-import { UserService } from '../../services/user.service';
-import { LogService } from '../../services/log.service';
+// Services Import 
+import { PouchDBService } from '../../services/pouchdb.service'
 
 // Import pages 
 import { Tasklist } from '../tasklist/tasklist';
@@ -15,25 +13,34 @@ import { Notiflist } from '../notificationlist/notiflist';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
-	public groups;
-	public users; 
-  	constructor(private logService: LogService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams, storage: Storage) 
-  	{
+/**
+ * The HomePage class / component 
+ * @type {HomePage}
+ */
+export class HomePage implements OnInit {
 
+	/**
+	 * The HomePage Constructor 
+	 * @param {NavController} public  navCtrl       Nav controller for routing pages
+	 * @param {NavParams}     public  navParams     Nav params for data bindings 
+	 */
+  	constructor(public navCtrl: NavController, public navParams: NavParams) 
+  	{
 
 	}
 
+	/**
+	 * Angular OnInit function 
+	 */
 	ngOnInit()
 	{
-		// let userData = this.navParams.get('userParams').split(',');
-		// this.logService.setData(userData);
+
 	}
 
 	/**
 	 * Go to the taskl list page 
 	 */
-	public goToTaskList()
+	public goToTaskList(): void 
 	{
 		this.navCtrl.push(Tasklist);
 	}
@@ -41,52 +48,9 @@ export class HomePage {
 	/**
 	 * Go to the notif list page 
 	 */
-	public goToNotifList()
+	public goToNotifList(): void 
 	{
 		this.navCtrl.push(Notiflist); 
-	}
-
-	public getGroups(): void
-	{
-		// this.groupService.getGroups()
-		// 	.subscribe(
-		// 		groups => this.groups = groups,
-		// 		err => console.log(err),
-		// 		() => console.log(this.groups)
-		// 	);
-	}
-
-	public addGroup(name: string): void
-	{
-		// let data = { "name": name };
-		// this.groupService.addGroup(data)
-		// 	.subscribe(
-		// 		groups => this.groups = groups,
-		// 		err => console.log(err),
-		// 		() => console.log('Group added')
-		// 	);
-	}
-
-	public getUsers(): void
-	{
-		// this.userService.getUsers()
-		// 	.subscribe(	
-		// 		users => this.users = users,
-		// 		err => console.log(err),
-		// 		() => console.log(this.users)
-		// 	);
-	}
-
-
-	public addUser(name: string, groupId: number, isAdmin: number): void
-	{
-		// let data = {"group_id": ""+groupId+"", "name":""+name+"", "points": 0, "is_admin":""+isAdmin+""};
-		// this.userService.addUser(data)
-		// 	.subscribe(
-		// 		users => this.users = users,
-		// 		err => console.error(err),
-		// 		() => console.log('User added')
-		// 	);
 	}
 }
     
