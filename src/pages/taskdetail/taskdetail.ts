@@ -73,7 +73,14 @@ export class Taskdetail implements OnInit{
 	{  
 		this._checkData();
 		console.log(this.isOwner, this.isReserved, this.isMaker);
-		if(this.isOwner)
+		if(this.isDone)
+		{
+				this.isValidateButton = false; 
+				this.isUpdateButton = false; 
+				this.isReservateButton = false; 
+				this.isDoneButton = false; 
+		}
+		else if(this.isOwner)
 		{	
 			if(!this.isDone)
 			{			
@@ -81,7 +88,6 @@ export class Taskdetail implements OnInit{
 				{
 					// ya button validate
 					this.isValidateButton = true; 
-
 				}
 				else
 				{

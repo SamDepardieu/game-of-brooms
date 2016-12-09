@@ -1,29 +1,65 @@
+// Angular Import 
 import { Component } from '@angular/core';
-
 import { NavController } from 'ionic-angular';
 
+// Import Services
 import { TaskService } from '../../services/task.service';
 import { LogService } from '../../services/log.service'; 
 
+// Import pages component 
 import { Tasklist } from '../tasklist/tasklist';
 
 @Component({
   selector: 'page-taskadd',
   templateUrl: 'taskadd.html'
 })
+/**
+ * The TaskAdd Class / Component
+ * @type{Class}
+ */
 export class Taskadd {
 
+	/**
+	 * The task name 
+	 * @type {string}
+	 */
 	public taskName: string;  
+
+	/**
+	 * The complete description of task 
+	 * @type {string}
+	 */
 	public taskDescription: string; 
+
+	/**
+	 * The points for the task 
+	 * @type {number}
+	 */
 	public taskPoints: number; 
+
+	/**
+	 * The deadline of the task 
+	 * @type {string}
+	 */
 	public taskDeadline: string;
 
-	constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController) {
+	/**
+	 * The Taskadd constructor 
+	 * @param {LogService}    private logService  The Log service for getting user data 
+	 * @param {TaskService}   private taskService The task service to manipulate tasks 
+	 * @param {NavController} public  navCtrl     The nav controller use for routing 
+	 */
+	constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController) 
+	{
 
 	}
 
-	public add():void 
+	/**
+	 * Add a new task function 
+	 */
+	public add(): void 
 	{
+		// Create the task object 
 		let obj = 
 		{
 			_id: this.logService.userLog.groupid+'-'+Date.now(),
@@ -41,7 +77,7 @@ export class Taskadd {
 			checker: []
 		};
 
-		console.log(obj);
+		// Add the task 
 		this.taskService.add(obj).then((response) =>
 		{
 			console.log('Task added', response);
@@ -52,7 +88,10 @@ export class Taskadd {
 		});
 	}
 
-	public getAll()
+	/**
+	 * Get all the tasks of the group 
+	 */
+	public getAll(): void 
 	{
 		this.taskService.getAll()
 	}
