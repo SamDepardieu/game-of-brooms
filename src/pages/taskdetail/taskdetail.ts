@@ -22,6 +22,7 @@ export class Taskdetail implements OnInit{
 	public isUpdateButton: boolean;
 	public isReservateButton: boolean;
 	public isDoneButton: boolean;
+	public isDone: boolean;
 
 	constructor(private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) {
 		this.taskInfo = navParams.data.data.doc;
@@ -30,6 +31,7 @@ export class Taskdetail implements OnInit{
 		this.isUpdateButton = false; 
 		this.isReservateButton = false; 
 		this.isDoneButton = false; 
+		this.isDone = false;
 	}
 
 	private _checkData(): void
@@ -60,6 +62,11 @@ export class Taskdetail implements OnInit{
 		{
 			this.isMaker = false; 
 		}
+
+		if(this.taskInfo.state === 'done')
+		{
+			this.isDone = true;
+		}
 	}
 
 	ngOnInit()
@@ -67,16 +74,20 @@ export class Taskdetail implements OnInit{
 		this._checkData();
 		console.log(this.isOwner, this.isReserved, this.isMaker);
 		if(this.isOwner)
-		{
-			if(this.isReserved)
-			{
-				// ya button validate
-				this.isValidateButton = true; 
-			}
-			else
-			{
-				// ya button edit 
-				this.isUpdateButton = true; 
+		{	
+			if(!this.isDone)
+			{			
+				if(this.isReserved)
+				{
+					// ya button validate
+					this.isValidateButton = true; 
+
+				}
+				else
+				{
+					// ya button edit 
+					this.isUpdateButton = true; 
+				}
 			}
 		}
 		else
@@ -91,6 +102,10 @@ export class Taskdetail implements OnInit{
 				else
 				{
 					// y a nothing 
+					// this.isReservateButton = false;
+					// this.isDoneButton = false;
+					// this.isValidateButton = false; 
+					// this.isUpdateButton = false; 
 				}
 			}
 			else
@@ -185,6 +200,8 @@ export class Taskdetail implements OnInit{
 			doc.checker.push(this.logService.userLog._id);
 			doc.state = 'done'
 			maker = doc.maker;
+			this.isValidateButton = false; 
+			this._addPointsToMaker(this.taskInfo.points, maker);
 			return this.pouchdbService.db.put(doc);
 		}).then(() =>
 		{
@@ -195,7 +212,7 @@ export class Taskdetail implements OnInit{
 			console.error(error); 
 		});
 
-		this._addPointsToMaker(this.taskInfo.points, maker);
+		// 
 	}
 
 	private _addPointsToMaker(points: number, user: string)
