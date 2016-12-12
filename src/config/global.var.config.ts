@@ -4,5 +4,5 @@
  */
 export class GlobalConfig
 {
-	public static get API_URL(): string { return "http://brooms.b2plus.com"; }
+	public static get API_URL(): string { return "http://brooms.b2plus.com/brooms"; }
 }
