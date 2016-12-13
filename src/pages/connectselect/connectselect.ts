@@ -1,6 +1,6 @@
 // Angular Import 
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 // Pages Import 
 import { HomePage } from '../home/home';
@@ -65,8 +65,9 @@ export class ConnectselectPage implements OnInit
 	 * @param {GroupService}   private groupService	  Service use to manipulate group data 
 	 * @param {NavController}  public  navCtrl        Nav controller for routing 
 	 * @param {NavParams}      public  navParams      Nav params for data bindings in routing
+	 * @param {ToastController} public toastCtrl	  Controller use to manipulate toast 
 	 */
-	constructor(private logService: LogService,private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
+	constructor(private logService: LogService,private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) {}
 
 	/**
 	 * Angular onInit function 
@@ -177,12 +178,32 @@ export class ConnectselectPage implements OnInit
 		this.groupService.add(newGroup).then((response) =>
 		{
 			console.log('Group added', response);
+			this._showToast('A new group being added');
+
 		}).catch((error) => 
 		{
 			console.error(error); 
+			this._showToast('An error occured'); 
 		});
 
 		// Update the group list 
 		this.updateListGroups();
+
+		// Clean field
+		this.groupName = ''; 
+	}
+
+	/**
+	 * Show a toast component 
+	 * @param {string} msg Message to show in the toast 
+	 */
+	private _showToast(msg: string):  void 
+	{
+		let toast = this.toastCtrl.create(
+		{
+			message: msg,
+			duration: 3000
+		});
+		toast.present(); 
 	}
 }
