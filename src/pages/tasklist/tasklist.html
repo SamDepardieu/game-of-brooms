@@ -15,10 +15,10 @@
     <p item-right>{{task.doc.points}} Points</p>
     <p item-right>{{task.doc.deadline | date}}</p> 
 
-    <ion-icon name="heart" *ngIf="task.doc.state == 'todo'"></ion-icon> 
-    <ion-icon name="heart" *ngIf="task.doc.state == 'doing'"></ion-icon> 
-    <ion-icon name="heart" *ngIf="task.doc.state == 'done'"></ion-icon>
-    <ion-icon name="heart" *ngIf="task.doc.state == 'ask validate'"></ion-icon> 
+    <ion-icon name="add" *ngIf="task.doc.state == 'todo'"></ion-icon> 
+    <ion-icon name="sync" *ngIf="task.doc.state == 'doing'"></ion-icon> 
+    <ion-icon name="checkmark" *ngIf="task.doc.state == 'done'"></ion-icon>
+    <ion-icon name="help" *ngIf="task.doc.state == 'ask validate'"></ion-icon> 
       
      
   </ion-item>
