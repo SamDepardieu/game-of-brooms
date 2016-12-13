@@ -13,9 +13,14 @@
     <h2>{{task.doc.name}}</h2>
     <h3>{{task.doc.description}}</h3>
     <p item-right>{{task.doc.points}} Points</p>
-    <p item-right>{{task.doc.deadline}}</p> 
+    <p item-right>{{task.doc.deadline | date}}</p> 
 
-    {{task.doc.state}}
+    <ion-icon name="heart" *ngIf="task.doc.state == 'todo'"></ion-icon> 
+    <ion-icon name="heart" *ngIf="task.doc.state == 'doing'"></ion-icon> 
+    <ion-icon name="heart" *ngIf="task.doc.state == 'done'"></ion-icon>
+    <ion-icon name="heart" *ngIf="task.doc.state == 'ask validate'"></ion-icon> 
+      
+     
   </ion-item>
 </ion-list>
   <button icon-left ion-button color="dark" (click)="goToTaskAdd()" >
