@@ -151,10 +151,17 @@ export class ConnectselectPage implements OnInit
 		}).then(() =>
 		{
 			console.log('Group updated'); 
+			this._showToast('A new user added'); 
 		}).catch((error) =>
 		{
 			console.error(error);
+			this._showToast('An error occured'); 
 		});
+
+		// Clean fields
+		this.newUserMail = ''; 
+		this.newUserName = ''; 
+		this.groupListChoice = ''; 
 	}
 
 	/**
