@@ -87,12 +87,4 @@ export class Taskadd {
 			console.error(error);
 		});
 	}
-
-	/**
-	 * Get all the tasks of the group 
-	 */
-	public getAll(): void 
-	{
-		this.taskService.getAll()
-	}
 }
