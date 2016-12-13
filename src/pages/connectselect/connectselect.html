@@ -9,7 +9,7 @@
 	<ion-list>
 		<ion-item>
 			<ion-label color="primary">Mail Adress</ion-label>
-			<ion-input [(ngModel)]="userMail" placeholder="mail.adress@mail.com"></ion-input>
+			<ion-input type="email" [(ngModel)]="userMail" placeholder="mail.adress@mail.com"></ion-input>
 		</ion-item>
 		<ion-item>
 			<button *ngIf="userMail" ion-button color="secondary" (click)="connect()">Connect</button>
@@ -20,7 +20,7 @@
 	<ion-list>
 		<ion-item>
 			<ion-label color="primary">Mail Adress</ion-label>
-			<ion-input [(ngModel)]="newUserMail" placeholder="mail.adress@mail.com"></ion-input></ion-item>
+			<ion-input type="email" [(ngModel)]="newUserMail" placeholder="mail.adress@mail.com"></ion-input></ion-item>
 		<ion-item>
 			<ion-label color="primary">Name</ion-label>
 			<ion-input [(ngModel)]="newUserName" placeholder="User Name"></ion-input></ion-item>
