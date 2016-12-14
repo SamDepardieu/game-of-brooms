@@ -1,6 +1,6 @@
 // Angular Import
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 // Import Services 
 import { LogService } from '../../services/log.service'; 
@@ -10,6 +10,8 @@ import { TaskService } from '../../services/task.service';
 
 // Import Pages 
 import { Tasklist } from '../tasklist/tasklist';
+import { HomePage } from '../home/home';
+import { ConnectselectPage } from '../connectselect/connectselect';
 
 @Component({
   selector: 'page-taskdetail',
@@ -83,8 +85,9 @@ export class Taskdetail implements OnInit{
 	 * @param {TaskService}    private taskService    The service use to manipulate tasks 
 	 * @param {NavController}  public  navCtrl        The controller for routing 
 	 * @param {NavParams}      public  navParams      The params for data bindings 
+	 * @param {ToastController} public toastCtrl  The controller to call toasts 
 	 */
-	constructor(private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) 
+	constructor(private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) 
 	{
 		this.taskInfo = navParams.data.data.doc;
 		this.taskInfo.deadline = new Date(this.taskInfo.deadline).toISOString();
@@ -316,6 +319,37 @@ export class Taskdetail implements OnInit{
 		{
 			console.error(error);
 		});
+	}
+
+	/**
+	 * Show the user profile information 
+	 */
+	public showProfile(): void 
+	{
+		let msg = 'Your profile information, your group is :'+this.logService.userLog.groupid+', your id is :'+this.logService.userLog._id+' and you have : '+this.logService.userLog.points+' point(s)';
+		let toast = this.toastCtrl.create(
+		{
+			message: msg,
+			duration: 5000
+		});
+
+		toast.present(); 
+	}
+
+	/**
+	 * Log out and return to the connect select page 
+	 */
+	public logout(): void
+	{
+		this.navCtrl.push(ConnectselectPage); 
+	}
+
+	/**
+	 * Return to the main menu 
+	 */
+	public returnMenu(): void
+	{
+		this.navCtrl.push(HomePage); 
 	}
 }
 

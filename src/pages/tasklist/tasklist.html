@@ -3,6 +3,20 @@
     <ion-title>
       Ionic TaskList
     </ion-title>
+     <ion-buttons end>
+     <button color="primary" ion-button (click)="returnMenu()">
+       <ion-icon name="list-box"></ion-icon>
+        Return menu 
+       </button>
+       <button color="primary" ion-button (click)="logout()">
+       <ion-icon name="contact"></ion-icon>
+         Logout
+       </button>
+       <button color="primary" ion-button (click)="showProfile()">
+       <ion-icon name="information-circle"></ion-icon>
+         Show Profile 
+       </button>
+     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
