@@ -1,8 +1,6 @@
 // Angular Import
 import { Injectable } from '@angular/core'
 
-import { Member } from '../classes/member';
-
 @Injectable()
 /**
  * The LogService class / service
