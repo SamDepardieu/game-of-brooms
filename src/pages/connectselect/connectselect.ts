@@ -115,11 +115,13 @@ export class ConnectselectPage implements OnInit
 		});
 	}
 
+
 	/**
 	 * The signup function map to the signup button
 	 */
 	public signup(): void
 	{
+		let access: boolean; 
 		// Create the user object 
 		let newUser = 
 		{ 
@@ -133,30 +135,46 @@ export class ConnectselectPage implements OnInit
 			groupid: this.groupListChoice
 		};
 
-		// Add the user 
-		this.userService.add(newUser).then((response) => 
+		// Get user 
+		this.userService.get(newUser._id).then((response) => 
 		{
-			console.log('User added', response);
+			access = false;
 		}).catch((error) =>
 		{
-			console.error(error); 
-		});
+			access = true; 
+		})
 
-		// Update the group with the new user 
-		this.groupService.get(this.groupListChoice).then((doc) =>
+		if(access)
 		{
-			doc.users.push(newUser._id);
-			doc.updated = Date.now();
-			return this.pouchdbService.db.put(doc);
-		}).then(() =>
+			// Add the user 
+			this.userService.add(newUser).then((response) => 
+			{
+				console.log('User added', response);
+			}).catch((error) =>
+			{
+				console.error(error); 
+			});
+
+			// Update the group with the new user 
+			this.groupService.get(this.groupListChoice).then((doc) =>
+			{
+				doc.users.push(newUser._id);
+				doc.updated = Date.now();
+				return this.pouchdbService.db.put(doc);
+			}).then(() =>
+			{
+				console.log('Group updated'); 
+				this._showToast('A new user added'); 
+			}).catch((error) =>
+			{
+				console.error(error);
+				this._showToast('An error occured'); 
+			});
+		}
+		else
 		{
-			console.log('Group updated'); 
-			this._showToast('A new user added'); 
-		}).catch((error) =>
-		{
-			console.error(error);
-			this._showToast('An error occured'); 
-		});
+			this._showToast('User already exists'); 
+		}
 
 		// Clean fields
 		this.newUserMail = ''; 
