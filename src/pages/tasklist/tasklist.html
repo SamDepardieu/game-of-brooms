@@ -1,20 +1,17 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic TaskList
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>
+			Ionic TaskList
+		</ion-title>
+	</ion-navbar>
 </ion-header>
-
 <ion-content padding>
-
 <ion-list>
   <ion-item *ngFor="let task of taskArray" (click)="clickOnItem(task)">
     <h2>{{task.doc.name}}</h2>
     <h3>{{task.doc.description}}</h3>
     <p item-right>{{task.doc.points}} Points</p>
-    <p item-right>{{task.doc.deadline}}</p> 
-
+    <p item-right>{{task.doc.deadline}}</p>
     {{task.doc.state}}
   </ion-item>
 </ion-list>

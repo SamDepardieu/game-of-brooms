@@ -1,4 +1,4 @@
-// Angular Import 
+// Angular Import
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -6,35 +6,35 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Taskadd } from '../taskadd/taskadd';
 import { Taskdetail } from '../taskdetail/taskdetail';
 
-// Import Services 
+// Import Services
 import { TaskService } from '../../services/task.service';
-import { LogService } from '../../services/log.service'; 
+import { LogService } from '../../services/log.service';
 
 @Component({
-  selector: 'page-tasklist',
-  templateUrl: 'tasklist.html'
+    selector: 'page-tasklist',
+    templateUrl: 'tasklist.html'
 })
 /**
- * Tasklist Class / Component 
+ * Tasklist Class / Component
  */
 export class Tasklist implements OnInit{
 
-	public taskArray; 
+	public taskArray;
 
 	/**
-	 * The Tasklist constructor 
+	 * The Tasklist constructor
 	 * @param {LogService}    private logService  The service use to call log infos
-	 * @param {TaskService}   private taskService The service use to manipulate tasks 
-	 * @param {NavController} public  navCtrl     The controller for routing 
-	 * @param {NavParams}     public  navParams   The params for data binding 
+	 * @param {TaskService}   private taskService The service use to manipulate tasks
+	 * @param {NavController} public  navCtrl     The controller for routing
+	 * @param {NavParams}     public  navParams   The params for data binding
 	 */
-	constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) 
+	constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams)
 	{
 
 	}
 
 	/**
-	 * Angular Init function 
+	 * Angular Init function
 	 */
 	ngOnInit()
 	{
@@ -45,7 +45,7 @@ export class Tasklist implements OnInit{
 			console.log(this.taskArray);
 		}).catch((error) =>
 		{
-			console.error(error); 
+			console.error(error);
 		})
 	}
 
@@ -55,19 +55,18 @@ export class Tasklist implements OnInit{
 	*/
 	public goToTaskAdd(): void
 	{
-		this.navCtrl.push(Taskadd); 
+		this.navCtrl.push(Taskadd);
 	}
 
 	/**
-	* function when you click on item 
+	* function when you click on item
 	* @param {item} item item
 	*/
 	public clickOnItem(item): void
 	{
-		this.navCtrl.push(Taskdetail, 
+		this.navCtrl.push(Taskdetail,
 		{
 			data: item
 		});
 	}
-
 }

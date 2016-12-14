@@ -1,48 +1,48 @@
-// Angular Import 
+// Angular Import
 import { Injectable } from '@angular/core';
 
-// Services import 
-import { PouchDBService } from './pouchdb.service'; 
+// Services import
+import { PouchDBService } from './pouchdb.service';
 
-// Declare emit for map reduce 
+// Declare emit for map reduce
 declare var emit: any;
 
 @Injectable()
 /**
- * The TaskService class / service 
+ * The TaskService class / service
  * @type {TaskService}
  */
 export class TaskService
 {
 	/**
-	 * The local db var 
+	 * The local db var
 	 * @type {PouchDB}
 	 */
-	private _db; 
+	private _db;
 
 	/**
-	 * The TaskService constructor 
-	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods 
+	 * The TaskService constructor
+	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods
 	 */
 	constructor(private pouchdbService: PouchDBService)
 	{
-		this._db = this.pouchdbService.db; 
+		this._db = this.pouchdbService.db;
 	}
 
 	/**
-	 * Get all the tasks for the page 
+	 * Get all the tasks for the page
 	 * @return {any} [description]
 	 */
-	public getAll(): any 
+	public getAll(): any
 	{
-		// The map function use to filter results 
+		// The map function use to filter results
 		function map(doc)
 		{
 			emit(doc.type);
 		}
 
-		// Query the base with map 
-		this._db.query(map, 
+		// Query the base with map
+		this._db.query(map,
 		{
 			key: 'task',
 			include_docs: true
@@ -56,12 +56,12 @@ export class TaskService
 	}
 
 	/**
-	 * Get all the tasks from a group function 
+	 * Get all the tasks from a group function
 	 * @param {string} groupName The name of the current group
 	 */
 	public getByGroup(groupName: string)
 	{
-		// Map function 
+		// Map function
 		function map(doc)
 		{
 			if(doc.type == 'task')
@@ -70,8 +70,8 @@ export class TaskService
 			}
 		}
 
-		// Return of the result 
-		return this._db.query(map, 
+		// Return of the result
+		return this._db.query(map,
 		{
 			key: groupName,
 			include_docs: true
@@ -80,58 +80,58 @@ export class TaskService
 			return result;
 		}).catch((error) =>
 		{
-			throw error; 
+			throw error;
 		})
 	}
 
-	public validate(): any 
+	public validate(): any
 	{}
 
 	/**
-	 * Get a task function 
-	 * @param  {string} id The id of a task 
-	 * @return {any}       Object with the docs 
+	 * Get a task function
+	 * @param  {string} id The id of a task
+	 * @return {any}       Object with the docs
 	 */
-	public get(id: string): any  
+	public get(id: string): any
 	{
-		return this._db.get(id).then((response) => 
+		return this._db.get(id).then((response) =>
 		{
 			return response;
 		}).catch((error) =>
 		{
-			throw error; 
+			throw error;
 		});
 	}
 
 	/**
-	 * Add a task function 
-	 * @param  {Object} obj The task to add 
-	 * @return {any}        Object with the docs 
+	 * Add a task function
+	 * @param  {Object} obj The task to add
+	 * @return {any}        Object with the docs
 	 */
-	public add(obj: Object): any 
+	public add(obj: Object): any
 	{
-		return this._db.put(obj).then((response) => 
+		return this._db.put(obj).then((response) =>
 		{
 			return response;
 		}).catch((error) =>
 		{
-			throw error; 
+			throw error;
 		});
 	}
 
 	/**
-	 * Remove a task function 
+	 * Remove a task function
 	 * @param  {string} doc The task to remove
-	 * @return {any}        Object with the docs 
+	 * @return {any}        Object with the docs
 	 */
 	public remove(doc: string): any
 	{
-		return this._db.remove(doc).then((response) => 
+		return this._db.remove(doc).then((response) =>
 		{
 			return response;
 		}).catch((error) =>
 		{
-			throw error; 
+			throw error;
 		});
 	}
 }

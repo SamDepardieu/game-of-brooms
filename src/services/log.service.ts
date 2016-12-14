@@ -1,23 +1,24 @@
-// Angular Import 
+// Angular Import
 import { Injectable } from '@angular/core'
 
+import { Member } from '../classes/member';
 
 @Injectable()
 /**
- * The LogService class / service 
+ * The LogService class / service
  * @type {[type]}
  */
 export class LogService
 {
 
 	/**
-	 * The user log data 
+	 * The user log data
 	 * @type {any}
 	 */
-	private _userLog; 
+	private _userLog;
 
 	/**
-	 * The LogService constructor 
+	 * The LogService constructor
 	 */
 	constructor()
 	{
@@ -29,16 +30,16 @@ export class LogService
 	 */
 	public get userLog() 
 	{
-		return this._userLog; 
+		return this._userLog;
 	}
 
 	/**
-	 * _userLog setter 
-	 * @param {any} newLog The new user log 
+	 * _userLog setter
+	 * @param {any} newLog The new user log
 	 */
 	public set userLog(newLog)
 	{
-		this._userLog = newLog; 
+		this._userLog = newLog;
 	}
 
 }

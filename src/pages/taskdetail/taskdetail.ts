@@ -2,18 +2,18 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-// Import Services 
-import { LogService } from '../../services/log.service'; 
+// Import Services
+import { LogService } from '../../services/log.service';
 import { PouchDBService } from '../../services/pouchdb.service';
-import { UserService } from '../../services/user.service'; 
+import { UserService } from '../../services/user.service';
 import { TaskService } from '../../services/task.service';
 
-// Import Pages 
+// Import Pages
 import { Tasklist } from '../tasklist/tasklist';
 
 @Component({
-  selector: 'page-taskdetail',
-  templateUrl: 'taskdetail.html'
+    selector: 'page-taskdetail',
+    templateUrl: 'taskdetail.html'
 })
 /**
  * The Taskdetail Class / Component
@@ -22,81 +22,81 @@ import { Tasklist } from '../tasklist/tasklist';
 export class Taskdetail implements OnInit{
 
 	/**
-	 * The complete task info 
+	 * The complete task info
 	 * @type {[type]}
 	 */
-	public taskInfo; 
+	public taskInfo;
 
 	/**
-	 * Is User Owner 
+	 * Is User Owner
 	 * @type {boolean}
 	 */
-	public isOwner: boolean; 
+	public isOwner: boolean;
 
 	/**
 	 * Is Task Reserved
 	 * @type {boolean}
 	 */
-	public isReserved: boolean; 
+	public isReserved: boolean;
 
 	/**
-	 * Is User Maker 
+	 * Is User Maker
 	 * @type {boolean}
 	 */
 	public isMaker: boolean;
 
 	/**
-	 * Is Validate Button visible 
+	 * Is Validate Button visible
 	 * @type {boolean}
 	 */
 	public isValidateButton: boolean;
 
 	/**
-	 * Is Update Button Visible 
+	 * Is Update Button Visible
 	 * @type {boolean}
 	 */
 	public isUpdateButton: boolean;
 
 	/**
-	 * Is Reservate Button Visible 
+	 * Is Reservate Button Visible
 	 * @type {boolean}
 	 */
 	public isReservateButton: boolean;
 
 	/**
-	 * Is Done Button Visible 
+	 * Is Done Button Visible
 	 * @type {boolean}
 	 */
 	public isDoneButton: boolean;
 
 	/**
-	 * Is Task Done 
+	 * Is Task Done
 	 * @type {boolean}
 	 */
 	public isDone: boolean;
 
 	/**
-	 * The task detail constructor 
-	 * @param {UserService}    private userService    The service use to manipulate user 
-	 * @param {PouchDBService} private pouchdbService The service use to call pouchdb 
+	 * The task detail constructor
+	 * @param {UserService}    private userService    The service use to manipulate user
+	 * @param {PouchDBService} private pouchdbService The service use to call pouchdb
 	 * @param {LogService}     private logService     The service use to have user logs
-	 * @param {TaskService}    private taskService    The service use to manipulate tasks 
-	 * @param {NavController}  public  navCtrl        The controller for routing 
-	 * @param {NavParams}      public  navParams      The params for data bindings 
+	 * @param {TaskService}    private taskService    The service use to manipulate tasks
+	 * @param {NavController}  public  navCtrl        The controller for routing
+	 * @param {NavParams}      public  navParams      The params for data bindings
 	 */
-	constructor(private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams) 
+	constructor(private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public navParams: NavParams)
 	{
 		this.taskInfo = navParams.data.data.doc;
 		this.taskInfo.deadline = new Date(this.taskInfo.deadline).toISOString();
-		this.isValidateButton = false; 
-		this.isUpdateButton = false; 
-		this.isReservateButton = false; 
-		this.isDoneButton = false; 
+		this.isValidateButton = false;
+		this.isUpdateButton = false;
+		this.isReservateButton = false;
+		this.isDoneButton = false;
 		this.isDone = false;
 	}
 
 	/**
-	 * The private method for checking data 
+	 * The private method for checking data
 	 */
 	private _checkData(): void
 	{
@@ -106,7 +106,7 @@ export class Taskdetail implements OnInit{
 		}
 		else
 		{
-			this.isOwner = false; 
+			this.isOwner = false;
 		}
 
 		if(this.taskInfo.maker)
@@ -115,7 +115,7 @@ export class Taskdetail implements OnInit{
 		}
 		else
 		{
-			this.isReserved = false; 
+			this.isReserved = false;
 		}
 
 		if(this.taskInfo.maker === this.logService.userLog._id)
@@ -124,7 +124,7 @@ export class Taskdetail implements OnInit{
 		}
 		else
 		{
-			this.isMaker = false; 
+			this.isMaker = false;
 		}
 
 		if(this.taskInfo.state === 'done')
@@ -134,29 +134,29 @@ export class Taskdetail implements OnInit{
 	}
 
 	/**
-	 * Angular OnInit function 
+	 * Angular OnInit function
 	 */
 	ngOnInit()
-	{  
+	{
 		this._checkData();
 		if(this.isDone)
 		{
-				this.isValidateButton = false; 
-				this.isUpdateButton = false; 
-				this.isReservateButton = false; 
-				this.isDoneButton = false; 
+				this.isValidateButton = false;
+				this.isUpdateButton = false;
+				this.isReservateButton = false;
+				this.isDoneButton = false;
 		}
 		else if(this.isOwner)
-		{	
+		{
 			if(!this.isDone)
-			{			
+			{
 				if(this.isReserved)
 				{
-					this.isValidateButton = true; 
+					this.isValidateButton = true;
 				}
 				else
 				{
-					this.isUpdateButton = true; 
+					this.isUpdateButton = true;
 				}
 			}
 		}
@@ -166,30 +166,30 @@ export class Taskdetail implements OnInit{
 			{
 				if(this.isMaker)
 				{
-					this.isDoneButton = true; 
+					this.isDoneButton = true;
 				}
 			}
 			else
 			{
-				this.isReservateButton = true; 
+				this.isReservateButton = true;
 			}
 		}
 	}
 
 	/**
-	 * The private method to change page 
+	 * The private method to change page
 	 */
-	private _goToTaskList(): void 
+	private _goToTaskList(): void
 	{
 		this.navCtrl.push(Tasklist);
 	}
 
 	/**
-	 * Reservate a task method 
+	 * Reservate a task method
 	 */
 	public reservate(): void
 	{
-		// Get the task and update it 
+		// Get the task and update it
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
@@ -198,20 +198,20 @@ export class Taskdetail implements OnInit{
 			return this.pouchdbService.db.put(doc);
 		}).then(() =>
 		{
-			console.log('Task reservate'); 
+			console.log('Task reservate');
 			this._goToTaskList();
 		}).catch((error) =>
 		{
-			console.error(error); 
+			console.error(error);
 		});
 	}
 
 	/**
-	 * Update a task method 
+	 * Update a task method
 	 */
-	public update(): void 
+	public update(): void
 	{
-		// Get the task and update it 
+		// Get the task and update it
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
@@ -224,19 +224,19 @@ export class Taskdetail implements OnInit{
 		}).then(() =>
 		{
 			console.log('Task updated');
-			this._goToTaskList(); 
+			this._goToTaskList();
 		}).catch((error) =>
 		{
-			console.error(error); 
+			console.error(error);
 		});
 	}
 
 	/**
-	 * Done a task method 
+	 * Done a task method
 	 */
-	public done(): void 
+	public done(): void
 	{
-		// Get the task and update it 
+		// Get the task and update it
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
@@ -245,19 +245,19 @@ export class Taskdetail implements OnInit{
 		}).then(() =>
 		{
 			console.log('Task done');
-			this._goToTaskList(); 
+			this._goToTaskList();
 		}).catch((error) =>
 		{
-			console.error(error); 
+			console.error(error);
 		});
 	}
 
 	/**
-	 * Delete a task method 
+	 * Delete a task method
 	 */
-	public delete(): void 
+	public delete(): void
 	{
-		// Remove the task 
+		// Remove the task
 		this.taskService.remove(this.taskInfo).then(() =>
 		{
 			console.log('Task delete');
@@ -270,44 +270,44 @@ export class Taskdetail implements OnInit{
 	}
 
 	/**
-	 * Validate a task method 
+	 * Validate a task method
 	 */
-	public validate(): void 
+	public validate(): void
 	{
 		let maker;
 
-		// Get the task and update it 
+		// Get the task and update it
 		this.taskService.get(this.taskInfo._id).then((doc) =>
 		{
 			doc.updated = Date.now();
 			doc.checker.push(this.logService.userLog._id);
 			doc.state = 'done'
 			maker = doc.maker;
-			this.isValidateButton = false; 
+			this.isValidateButton = false;
 			this._addPointsToMaker(this.taskInfo.points, maker);
 			return this.pouchdbService.db.put(doc);
 		}).then(() =>
 		{
-			console.log('Task validate'); 
-			
+			console.log('Task validate');
+
 		}).catch((error) =>
 		{
-			console.error(error); 
+			console.error(error);
 		});
 	}
 
 	/**
-	 * Method to add points for the user maker 
+	 * Method to add points for the user maker
 	 * @param {number} points The points to add
-	 * @param {string} user   The user to add points 
+	 * @param {string} user   The user to add points
 	 */
 	private _addPointsToMaker(points: number, user: string)
 	{
-		// Get the user and add points, update it 
+		// Get the user and add points, update it
 		this.userService.get(user).then((doc) =>
 		{
-			doc.points += points; 
-			return this.pouchdbService.db.put(doc); 
+			doc.points += points;
+			return this.pouchdbService.db.put(doc);
 		}).then(() =>
 		{
 			console.log('Points add to user');
@@ -318,5 +318,3 @@ export class Taskdetail implements OnInit{
 		});
 	}
 }
-
-

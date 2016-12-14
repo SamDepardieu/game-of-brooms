@@ -1,31 +1,32 @@
-// Angular Import 
+// Angular Import
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-// Pages Import 
+// Pages Import
 import { HomePage } from '../home/home';
 
-// Services Import 
+// Services Import
 import { UserService } from '../../services/user.service';
-import { GroupService } from '../../services/group.service'; 
-import { PouchDBService } from '../../services/pouchdb.service'; 
-import { LogService } from '../../services/log.service'; 
+import { GroupService } from '../../services/group.service';
+import { PouchDBService } from '../../services/pouchdb.service';
+import { LogService } from '../../services/log.service';
 
 @Component({
 	selector: 'page-connectselect',
 	templateUrl: 'connectselect.html'
 })
+
 /**
- * The ConnectselectPage class / component 
+ * The ConnectselectPage class / component
  * @type {ConnectselectPage}
  */
 export class ConnectselectPage implements OnInit
 {
 	/**
-	 * The login user mail 
+	 * The login user mail
 	 * @type {string}
 	 */
-	public userMail: string; 
+	public userMail: string;
 
 	/**
 	 * The signup user mail
@@ -34,42 +35,42 @@ export class ConnectselectPage implements OnInit
 	public newUserMail: string;
 
 	/**
-	 * The signup user name 
+	 * The signup user name
 	 * @type {string}
 	 */
-	public newUserName: string; 
+	public newUserName: string;
 
 	/**
-	 * The new group name 
+	 * The new group name
 	 * @type {string}
 	 */
 	public groupName: string;
 
 	/**
-	 * The list of groups 
+	 * The list of groups
 	 * @type {Array<string>}
 	 */
-	public groupList: Array<string>; 
+	public groupList: Array<string>;
 
 	/**
-	 * The user choice of a group 
+	 * The user choice of a group
 	 * @type {string}
 	 */
 	public groupListChoice;
 
 	/**
-	 * The ConnectselectPage constructor 
+	 * The ConnectselectPage constructor
 	 * @param {LogService}	   private logService     Service use to call LogService methods
 	 * @param {PouchDBService} private pouchdbService Service use to call pouchDB methods
-	 * @param {UserService}    private userService    Service use to manipulate user data 
-	 * @param {GroupService}   private groupService	  Service use to manipulate group data 
-	 * @param {NavController}  public  navCtrl        Nav controller for routing 
+	 * @param {UserService}    private userService    Service use to manipulate user data
+	 * @param {GroupService}   private groupService	  Service use to manipulate group data
+	 * @param {NavController}  public  navCtrl        Nav controller for routing
 	 * @param {NavParams}      public  navParams      Nav params for data bindings in routing
 	 */
 	constructor(private logService: LogService,private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
 
 	/**
-	 * Angular onInit function 
+	 * Angular onInit function
 	 */
 	ngOnInit()
 	{
@@ -79,11 +80,11 @@ export class ConnectselectPage implements OnInit
 	}
 
 	/**
-	 * Update the group list 
+	 * Update the group list
 	 */
 	public updateListGroups(): void
 	{
-		// Call the db 
+		// Call the db
 		this.groupService.getAll().then((response) =>
 		{
 			console.log(response);
@@ -95,20 +96,20 @@ export class ConnectselectPage implements OnInit
 	}
 
 	/**
-	 * The connect function map to the connect button 
+	 * The connect function map to the connect button
 	 */
 	public connect(): void
 	{
-		// Check if the user already exists 
-		this.userService.get(this.userMail).then((response) => 
+		// Check if the user already exists
+		this.userService.get(this.userMail).then((response) =>
 		{
-			this.logService.userLog = response; 
-			this.navCtrl.push(HomePage, 
+			this.logService.userLog = response;
+			this.navCtrl.push(HomePage,
 			{
 				userParams: this.userMail
 			});
 		})
-		.catch((error) => 
+		.catch((error) =>
 		{
 			console.error(error);
 		});
@@ -119,29 +120,29 @@ export class ConnectselectPage implements OnInit
 	 */
 	public signup(): void
 	{
-		// Create the user object 
-		let newUser = 
-		{ 
+		// Create the user object
+		let newUser =
+		{
 			_id: this.newUserMail,
 			type: 'user',
 			name: this.newUserName,
 			created: Date.now(),
 			updated: Date.now(),
-			points: 0, 
+			points: 0,
 			isAdmin: false,
 			groupid: this.groupListChoice
 		};
 
-		// Add the user 
-		this.userService.add(newUser).then((response) => 
+		// Add the user
+		this.userService.add(newUser).then((response) =>
 		{
 			console.log('User added', response);
 		}).catch((error) =>
 		{
-			console.error(error); 
+			console.error(error);
 		});
 
-		// Update the group with the new user 
+		// Update the group with the new user
 		this.groupService.get(this.groupListChoice).then((doc) =>
 		{
 			doc.users.push(newUser._id);
@@ -149,7 +150,7 @@ export class ConnectselectPage implements OnInit
 			return this.pouchdbService.db.put(doc);
 		}).then(() =>
 		{
-			console.log('Group updated'); 
+			console.log('Group updated');
 		}).catch((error) =>
 		{
 			console.error(error);
@@ -157,12 +158,12 @@ export class ConnectselectPage implements OnInit
 	}
 
 	/**
-	 * Create a new group function 
+	 * Create a new group function
 	 */
 	public createNewGroup(): void
 	{
-		// Create the group object 
-		let newGroup = 
+		// Create the group object
+		let newGroup =
 		{
 			_id: this.groupName,
 			type: 'group',
@@ -173,16 +174,16 @@ export class ConnectselectPage implements OnInit
 			users: []
 		};
 
-		// Add the group 
+		// Add the group
 		this.groupService.add(newGroup).then((response) =>
 		{
 			console.log('Group added', response);
-		}).catch((error) => 
+		}).catch((error) =>
 		{
-			console.error(error); 
+			console.error(error);
 		});
 
-		// Update the group list 
+		// Update the group list
 		this.updateListGroups();
 	}
 }
