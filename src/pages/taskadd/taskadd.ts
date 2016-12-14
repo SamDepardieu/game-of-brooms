@@ -1,6 +1,6 @@
 // Angular Import 
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 // Import Services
 import { TaskService } from '../../services/task.service';
@@ -8,6 +8,8 @@ import { LogService } from '../../services/log.service';
 
 // Import pages component 
 import { Tasklist } from '../tasklist/tasklist';
+import { HomePage } from '../home/home';
+import { ConnectselectPage } from '../connectselect/connectselect';
 
 @Component({
   selector: 'page-taskadd',
@@ -48,8 +50,9 @@ export class Taskadd {
 	 * @param {LogService}    private logService  The Log service for getting user data 
 	 * @param {TaskService}   private taskService The task service to manipulate tasks 
 	 * @param {NavController} public  navCtrl     The nav controller use for routing 
+	 * @param {ToastController} public toastCtrl  The controller to call toasts 
 	 */
-	constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController) 
+	constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public toastCtrl: ToastController) 
 	{
 
 	}
@@ -89,10 +92,33 @@ export class Taskadd {
 	}
 
 	/**
-	 * Get all the tasks of the group 
+	 * Show the user profile information 
 	 */
-	public getAll(): void 
+	public showProfile(): void 
 	{
-		this.taskService.getAll()
+		let msg = 'Your profile information, your group is :'+this.logService.userLog.groupid+', your id is :'+this.logService.userLog._id+' and you have : '+this.logService.userLog.points+' point(s)';
+		let toast = this.toastCtrl.create(
+		{
+			message: msg,
+			duration: 5000
+		});
+
+		toast.present(); 
+	}
+
+	/**
+	 * Log out and return to the connect select page 
+	 */
+	public logout(): void
+	{
+		this.navCtrl.push(ConnectselectPage); 
+	}
+
+	/**
+	 * Return to the main menu 
+	 */
+	public returnMenu(): void
+	{
+		this.navCtrl.push(HomePage); 
 	}
 }
