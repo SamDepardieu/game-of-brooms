@@ -138,13 +138,13 @@ export class ConnectselectPage implements OnInit
 		// Get user 
 		this.userService.get(newUser._id).then((response) => 
 		{
-			access = false;
+			access = true;
 		}).catch((error) =>
 		{
-			access = true; 
+			access = false; 
 		})
 
-		if(access)
+		if(!access)
 		{
 			// Add the user 
 			this.userService.add(newUser).then((response) => 
