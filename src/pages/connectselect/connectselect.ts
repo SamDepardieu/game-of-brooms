@@ -1,6 +1,6 @@
 // Angular Import
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 // Pages Import
 import { HomePage } from '../home/home';
@@ -66,8 +66,9 @@ export class ConnectselectPage implements OnInit
 	 * @param {GroupService}   private groupService	  Service use to manipulate group data
 	 * @param {NavController}  public  navCtrl        Nav controller for routing
 	 * @param {NavParams}      public  navParams      Nav params for data bindings in routing
+	 * @param {ToastController} public toastCtrl	  Controller use to manipulate toast 
 	 */
-	constructor(private logService: LogService,private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public navCtrl: NavController, public navParams: NavParams) {}
+	constructor(private logService: LogService,private pouchdbService: PouchDBService, private groupService: GroupService, private userService: UserService, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) {}
 
 	/**
 	 * Angular onInit function
@@ -115,14 +116,17 @@ export class ConnectselectPage implements OnInit
 		});
 	}
 
+
 	/**
 	 * The signup function map to the signup button
 	 */
 	public signup(): void
 	{
-		// Create the user object
-		let newUser =
-		{
+
+		let access: boolean; 
+		// Create the user object 
+		let newUser = 
+		{ 
 			_id: this.newUserMail,
 			type: 'user',
 			name: this.newUserName,
@@ -133,28 +137,52 @@ export class ConnectselectPage implements OnInit
 			groupid: this.groupListChoice
 		};
 
-		// Add the user
-		this.userService.add(newUser).then((response) =>
-		{
-			console.log('User added', response);
-		}).catch((error) =>
-		{
-			console.error(error);
-		});
+		// Get user 
+		this.userService.get(newUser._id).then((response) => 
 
-		// Update the group with the new user
-		this.groupService.get(this.groupListChoice).then((doc) =>
 		{
-			doc.users.push(newUser._id);
-			doc.updated = Date.now();
-			return this.pouchdbService.db.put(doc);
-		}).then(() =>
-		{
-			console.log('Group updated');
+			access = true;
 		}).catch((error) =>
 		{
-			console.error(error);
-		});
+			access = false; 
+		})
+
+		if(!access)
+		{
+			// Add the user 
+			this.userService.add(newUser).then((response) => 
+			{
+				console.log('User added', response);
+			}).catch((error) =>
+			{
+				console.error(error); 
+			});
+
+			// Update the group with the new user 
+			this.groupService.get(this.groupListChoice).then((doc) =>
+			{
+				doc.users.push(newUser._id);
+				doc.updated = Date.now();
+				return this.pouchdbService.db.put(doc);
+			}).then(() =>
+			{
+				console.log('Group updated'); 
+				this._showToast('A new user added'); 
+			}).catch((error) =>
+			{
+				console.error(error);
+				this._showToast('An error occured'); 
+			});
+		}
+		else
+		{
+			this._showToast('User already exists'); 
+		}
+
+		// Clean fields
+		this.newUserMail = ''; 
+		this.newUserName = ''; 
+		this.groupListChoice = ''; 
 	}
 
 	/**
@@ -178,12 +206,33 @@ export class ConnectselectPage implements OnInit
 		this.groupService.add(newGroup).then((response) =>
 		{
 			console.log('Group added', response);
-		}).catch((error) =>
+
+			this._showToast('A new group being added');
+
+		}).catch((error) => 
 		{
-			console.error(error);
+			console.error(error); 
+			this._showToast('An error occured'); 
 		});
 
 		// Update the group list
 		this.updateListGroups();
+
+		// Clean field
+		this.groupName = ''; 
+	}
+
+	/**
+	 * Show a toast component 
+	 * @param {string} msg Message to show in the toast 
+	 */
+	private _showToast(msg: string):  void 
+	{
+		let toast = this.toastCtrl.create(
+		{
+			message: msg,
+			duration: 3000
+		});
+		toast.present(); 
 	}
 }

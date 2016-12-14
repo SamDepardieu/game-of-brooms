@@ -3,8 +3,8 @@ import { Platform }     from 'ionic-angular';
 
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { HomePage }             from '../pages/home/home';
-import { ConnectselectPage }    from '../pages/connectselect/connectselect'
+// Import for the default page 
+import { ConnectselectPage } from '../pages/connectselect/connectselect'
 
 @Component({
     template: `<ion-nav [root]="rootPage"></ion-nav>`

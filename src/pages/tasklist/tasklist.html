@@ -1,9 +1,23 @@
 <ion-header>
-	<ion-navbar>
-		<ion-title>
-			Ionic TaskList
-		</ion-title>
-	</ion-navbar>
+  <ion-navbar>
+    <ion-title>
+      Ionic TaskList
+    </ion-title>
+     <ion-buttons end>
+     <button color="primary" ion-button (click)="returnMenu()">
+       <ion-icon name="list-box"></ion-icon>
+        Return menu 
+       </button>
+       <button color="primary" ion-button (click)="logout()">
+       <ion-icon name="contact"></ion-icon>
+         Logout
+       </button>
+       <button color="primary" ion-button (click)="showProfile()">
+       <ion-icon name="information-circle"></ion-icon>
+         Show Profile 
+       </button>
+     </ion-buttons>
+  </ion-navbar>
 </ion-header>
 <ion-content padding>
 <ion-list>
@@ -11,8 +25,12 @@
     <h2>{{task.doc.name}}</h2>
     <h3>{{task.doc.description}}</h3>
     <p item-right>{{task.doc.points}} Points</p>
-    <p item-right>{{task.doc.deadline}}</p>
-    {{task.doc.state}}
+    <p item-right>{{task.doc.deadline | date}}</p> 
+
+    <ion-icon name="add" *ngIf="task.doc.state == 'todo'"></ion-icon> 
+    <ion-icon name="sync" *ngIf="task.doc.state == 'doing'"></ion-icon> 
+    <ion-icon name="checkmark" *ngIf="task.doc.state == 'done'"></ion-icon>
+    <ion-icon name="help" *ngIf="task.doc.state == 'ask validate'"></ion-icon> 
   </ion-item>
 </ion-list>
   <button icon-left ion-button color="dark" (click)="goToTaskAdd()" >

@@ -2,12 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-// Services Import
-import { PouchDBService } from '../../services/pouchdb.service'
+// Import pages 
+import { Tasklist } from '../tasklist/tasklist';
+import { Notiflist } from '../notificationlist/notiflist';
 
-// Import pages
-import { Tasklist }   from '../tasklist/tasklist';
-import { Notiflist }  from '../notificationlist/notiflist';
 
 @Component({
   selector: 'page-home',
