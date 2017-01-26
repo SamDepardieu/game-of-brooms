@@ -5,6 +5,10 @@ import { NavController, NavParams } from 'ionic-angular';
 // Import pages 
 import { Tasklist } from '../tasklist/tasklist';
 import { Notiflist } from '../notificationlist/notiflist';
+import { ConnectselectPage } from '../connectselect/connectselect'; 
+
+// Import services
+import { LogService } from '../../services/log.service'; 
 
 
 @Component({
@@ -18,12 +22,16 @@ import { Notiflist } from '../notificationlist/notiflist';
  */
 export class HomePage implements OnInit {
 
+
+	public userGroup;
+	public userId;
+	public userPoints; 
 	/**
 	 * The HomePage Constructor
 	 * @param {NavController} public  navCtrl       Nav controller for routing pages
 	 * @param {NavParams}     public  navParams     Nav params for data bindings
 	 */
-  	constructor(public navCtrl: NavController, public navParams: NavParams)
+  	constructor(private logservice: LogService, public navCtrl: NavController, public navParams: NavParams)
   	{
     }
 
@@ -32,7 +40,9 @@ export class HomePage implements OnInit {
 	 */
 	ngOnInit()
 	{
-
+		this.userGroup = this.logservice.userLog.groupid;
+		this.userId = this.logservice.userLog._id;
+		this.userPoints = this.logservice.userLog.points; 
 	}
 
 	/**
@@ -49,5 +59,10 @@ export class HomePage implements OnInit {
 	public goToNotifList(): void
 	{
 		this.navCtrl.push(Notiflist);
+	}
+
+	public logout()
+	{
+		this.navCtrl.push(ConnectselectPage);
 	}
 }

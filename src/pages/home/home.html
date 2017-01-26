@@ -1,12 +1,23 @@
 <ion-header>
 	<ion-navbar>
 		<ion-title>
-			Ionic Menu
+			Home
 		</ion-title>
+ 	 <ion-buttons end>
+       <button color="primary" ion-button (click)="logout()">
+       <ion-icon name="contact"></ion-icon>
+       </button>
+     </ion-buttons>
+
+
 	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
+
+	<p>{{this.userGroup}}</p>
+	<p>Welcome, {{this.userId}}</p>
+	<p>You have {{this.userPoints}} point(s)</p>
 	<button ion-button icon-left full large color="light" (click)="goToTaskList()">
 		<ion-icon name="md-checkbox-outline"></ion-icon>
 		Tasks List

@@ -113,6 +113,7 @@ export class ConnectselectPage implements OnInit
 		.catch((error) =>
 		{
 			console.error(error);
+			this._showToast('Problem with login !'); 
 		});
 	}
 
