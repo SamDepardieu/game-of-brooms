@@ -74,21 +74,6 @@ export class Tasklist implements OnInit{
 	}
 
 	/**
-	 * Show the user profile information 
-	 */
-	public showProfile(): void 
-	{
-		let msg = 'Your profile information, your group is :'+this.logService.userLog.groupid+', your id is :'+this.logService.userLog._id+' and you have : '+this.logService.userLog.points+' point(s)';
-		let toast = this.toastCtrl.create(
-		{
-			message: msg,
-			duration: 5000
-		});
-
-		toast.present(); 
-	}
-
-	/**
 	 * Log out and return to the connect select page 
 	 */
 	public logout(): void
