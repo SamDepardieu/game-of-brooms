@@ -1,10 +1,9 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>Connection Page </ion-title>
+		<ion-title>Connection</ion-title>
 		<ion-buttons end>
      <button color="primary" ion-button (click)="updateListGroups()">
        <ion-icon name="sync"></ion-icon>
-        Refresh and sync DB
        </button>
      </ion-buttons>
 	</ion-navbar>
@@ -19,7 +18,7 @@
 			<ion-input type="email" [(ngModel)]="userMail" placeholder="mail.adress@mail.com"></ion-input>
 		</ion-item>
 		<ion-item>
-			<button *ngIf="userMail" ion-button color="secondary" (click)="connect()">Connect</button>
+			<button *ngIf="userMail" ion-button color="secondary" full (click)="connect()">Connect</button>
 		</ion-item>
 	</ion-list>
 
@@ -38,7 +37,7 @@
 			</ion-select>
 		</ion-item> 
 		<ion-item>
-			<button *ngIf="newUserMail && newUserName" ion-button color="secondary" (click)="signup()">Signup</button>
+			<button *ngIf="newUserMail && newUserName" ion-button color="secondary" full (click)="signup()">Signup</button>
 		</ion-item>
 	</ion-list>
 
@@ -49,7 +48,7 @@
 			<ion-input [(ngModel)]="groupName" placeholder="Group Name"></ion-input>
 		</ion-item>
 		<ion-item>
-			<button *ngIf="groupName" ion-button color="secondary" (click)="createNewGroup()">Add a group</button>
+			<button *ngIf="groupName" ion-button color="secondary" full (click)="createNewGroup()">Add a group</button>
 		</ion-item>
 	</ion-list>
 </ion-content>
