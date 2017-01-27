@@ -77,6 +77,8 @@ export class Taskdetail implements OnInit{
 	 */
 	public isDone: boolean;
 
+	public readOnly: boolean; 
+
 	/**
 	 * The task detail constructor
 	 * @param {UserService}    private userService    The service use to manipulate user
@@ -97,6 +99,7 @@ export class Taskdetail implements OnInit{
 		this.isReservateButton = false;
 		this.isDoneButton = false;
 		this.isDone = false;
+		this.readOnly = false; 
 	}
 
 	/**
