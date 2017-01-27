@@ -54,7 +54,7 @@ export class Taskadd {
 	 */
 	constructor(private logService: LogService, private taskService: TaskService, public navCtrl: NavController, public toastCtrl: ToastController) 
 	{
-
+		this.taskDeadline = new Date().toISOString(); 
 	}
 
 	/**
@@ -96,6 +96,13 @@ export class Taskadd {
 			this.taskService.add(obj).then((response) =>
 			{
 				console.log('Task added', response);
+				let toastAdd = this.toastCtrl.create(
+				{
+					message: "A task added",
+					duration: 2500
+				});
+
+				toastAdd.present(); 
 				this.navCtrl.push(Tasklist);
 			}).catch((error) =>
 			{

@@ -249,6 +249,13 @@ export class Taskdetail implements OnInit{
 		}).then(() =>
 		{
 			console.log('Task done');
+			let toastDone = this.toastCtrl.create(
+			{
+				message: "A task done",
+				duration: 2000
+			});
+
+			toastDone.present(); 
 			this._goToTaskList();
 		}).catch((error) =>
 		{
@@ -275,6 +282,13 @@ export class Taskdetail implements OnInit{
 						this.taskService.remove(this.taskInfo).then(() =>
 						{
 							console.log('Task delete');
+							let toastDelete = this.toastCtrl.create(
+							{
+								message: "A task delete",
+								duration: 2500
+							});
+
+							toastDelete.present(); 
 							this._goToTaskList();
 
 						}).catch((error) =>
@@ -317,9 +331,23 @@ export class Taskdetail implements OnInit{
 		}).then(() =>
 		{
 			console.log('Task validate');
+			let toastUpdate = this.toastCtrl.create(
+			{
+				message: "A task updated",
+				duration: 5000
+			});
+
+			toastUpdate.present(); 
 
 		}).catch((error) =>
 		{
+			let toastError = this.toastCtrl.create(
+			{
+				message: "An error occured",
+				duration: 5000
+			});
+
+			toastError.present(); 
 			console.error(error);
 		});
 	}
