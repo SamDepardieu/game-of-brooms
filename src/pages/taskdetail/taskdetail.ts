@@ -1,6 +1,6 @@
 // Angular Import
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 
 // Import Services
 import { LogService } from '../../services/log.service';
@@ -86,8 +86,9 @@ export class Taskdetail implements OnInit{
 	 * @param {NavController}  public  navCtrl        The controller for routing 
 	 * @param {NavParams}      public  navParams      The params for data bindings 
 	 * @param {ToastController} public toastCtrl  The controller to call toasts 
+	 * @param {AlertController} public alertCtrl  The controller for alert 
 	 */
-	constructor(private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) 
+	constructor(private alertCtrl: AlertController, private userService: UserService, private pouchdbService: PouchDBService, private logService: LogService, private taskService: TaskService, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) 
 	{
 		this.taskInfo = navParams.data.data.doc;
 		this.taskInfo.deadline = new Date(this.taskInfo.deadline).toISOString();
@@ -260,16 +261,40 @@ export class Taskdetail implements OnInit{
 	 */
 	public delete(): void
 	{
-		// Remove the task
-		this.taskService.remove(this.taskInfo).then(() =>
-		{
-			console.log('Task delete');
-			this._goToTaskList();
 
-		}).catch((error) =>
+		let confirm = this.alertCtrl.create(
 		{
-			console.error(error);
-		})
+			title: "Confirm your choice ?",
+			message: "Are you sure you want to delete this task ?",
+			buttons: [
+				{
+					text: "Yes, I'm sure",
+					handler: () =>
+					{
+						// Remove the task
+						this.taskService.remove(this.taskInfo).then(() =>
+						{
+							console.log('Task delete');
+							this._goToTaskList();
+
+						}).catch((error) =>
+						{
+							console.error(error);
+						});
+					}
+				},
+				{
+					text: "No, I don't want to delete",
+					handler: () =>
+					{
+
+					}
+				}
+			]
+		});
+
+		confirm.present(); 
+		
 	}
 
 	/**

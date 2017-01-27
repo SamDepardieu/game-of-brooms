@@ -62,33 +62,47 @@ export class Taskadd {
 	 */
 	public add(): void
 	{
-		// Create the task object
-		let obj =
+		if(!this.taskDeadline || !this.taskName || !this.taskDescription || !this.taskPoints)
 		{
-			_id: this.logService.userLog.groupid+'-'+Date.now(),
-			type: 'task', 
-			name: this.taskName,
-			description: this.taskDescription,
-			state: 'todo',
-			created: Date.now(),
-			updated: Date.now(),
-			deadline: Date.parse(this.taskDeadline),
-			points: this.taskPoints,
-			group: this.logService.userLog.groupid,
-			owner: this.logService.userLog._id,
-			maker: '',
-			checker: []
-		};
+			let toast = this.toastCtrl.create(
+			{
+				message: "An error occured, one or several field(s) are blank",
+				duration: 5000
+			});
 
-		// Add the task
-		this.taskService.add(obj).then((response) =>
+			toast.present(); 
+		}
+		else
 		{
-			console.log('Task added', response);
-			this.navCtrl.push(Tasklist);
-		}).catch((error) =>
-		{
-			console.error(error);
-		});
+			// Create the task object
+			let obj =
+			{
+				_id: this.logService.userLog.groupid+'-'+Date.now(),
+				type: 'task', 
+				name: this.taskName,
+				description: this.taskDescription,
+				state: 'todo',
+				created: Date.now(),
+				updated: Date.now(),
+				deadline: Date.parse(this.taskDeadline),
+				points: this.taskPoints,
+				group: this.logService.userLog.groupid,
+				owner: this.logService.userLog._id,
+				maker: '',
+				checker: []
+			};
+
+			// Add the task
+			this.taskService.add(obj).then((response) =>
+			{
+				console.log('Task added', response);
+				this.navCtrl.push(Tasklist);
+			}).catch((error) =>
+			{
+				console.error(error);
+			});
+		}
+		
 	}
 
 	/**
