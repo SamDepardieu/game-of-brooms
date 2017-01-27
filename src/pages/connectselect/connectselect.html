@@ -12,15 +12,16 @@
 
 <ion-content padding>
 	<h2>Login</h2>
-	<ion-list>
+		<ion-list>
 		<ion-item>
 			<ion-label color="primary">Mail Adress</ion-label>
 			<ion-input type="email" [(ngModel)]="userMail" placeholder="mail.adress@mail.com"></ion-input>
 		</ion-item>
 		<ion-item>
-			<button *ngIf="userMail" ion-button color="secondary" full (click)="connect()">Connect</button>
+			<button type="submit" *ngIf="userMail" ion-button color="secondary" full (click)="connect()">Connect</button>
 		</ion-item>
 	</ion-list>
+	
 
 	<h2>Signup</h2>
 	<ion-list>
